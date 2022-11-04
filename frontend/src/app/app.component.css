@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-flow: column;
+    height: calc(100vh - 60px);
+}
+
+.content {
+    flex: 1;
+}
+
+
+.router-container {
+    margin-top: 5rem;
+}
+

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterHomeComponent } from './register-home/register-home.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 
 @NgModule({
   declarations: [
-    RegisterHomeComponent
+    RegisterHomeComponent,
+    RegisterFormComponent
   ],
   imports: [
     CommonModule,
