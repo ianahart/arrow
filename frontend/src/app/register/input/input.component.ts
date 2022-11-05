@@ -16,6 +16,7 @@ export class InputComponent implements OnInit {
     @Input() group = '';
     @Input() controlName = '';
     @Input() errorMsg = '';
+    @Input() type = '';
 
     constructor() {}
 

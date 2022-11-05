@@ -4,22 +4,34 @@
     </header>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
         <div class="row">
-            <app-input controlName="firstName"
+            <app-input controlName="firstName" [type]="'type'"
                 [validator]="firstName?.errors?.['maxlength'] && firstName?.dirty && firstName?.touched"
                 [group]="registerForm" [id]="'firstName'"
                 [required]="firstName?.errors?.['required'] && firstName?.touched" [name]="firstName"
                 [label]="'First Name'" [errorMsg]="'First name cannot exceed 75 characters'"></app-input>
 
-            <app-input controlName="lastName"
+            <app-input controlName="lastName" [type]="'text'"
                 [validator]="lastName?.errors?.['maxlength'] && lastName?.dirty && lastName?.touched"
                 [group]="registerForm" [id]="'lastName'"
                 [required]="lastName?.errors?.['required'] && lastName?.touched" [name]="lastName" [label]="'Last Name'"
                 [errorMsg]="'Last name  cannot exceed 75 characters'"></app-input>
         </div>
-        <app-input controlName="email" [group]="registerForm" [id]="'email'"
+        <app-input controlName="email" [group]="registerForm" [id]="'email'" [type]="'email'"
             [required]="email?.errors?.['required'] && email?.touched" [name]="email" [label]="'Email'"
             [validator]="email?.errors?.['email']  && email?.dirty && email?.touched"
             [errorMsg]="'Please provide a valid email address'"></app-input>
+        <app-input controlName="password" [group]="registerForm" [type]="'password'" [id]="'password'"
+            [required]="password?.errors?.['required'] && password?.touched" [name]="password" [label]="'Password'"
+            [validator]="password?.errors?.['pattern'] && password?.dirty && password?.touched"
+            [errorMsg]="'Password must include 1 uppercase, 1 special character , 1 numeric, and must be at least 8 characters long'">
+        </app-input>
+        <app-input
+            [validator]="confirmPassword?.errors['confirmPasswordValidator'] && confirmPassword?.dirty  &&  confirmPassword?.touched"
+            controlName="confirmPassword" [group]="registerForm" [type]="'password'" [id]="'confirmPassword'"
+            [required]="confirmPassword?.errors?.['required'] && confirmPassword?.touched" [name]="confirmPassword"
+            [label]="'Confirm Password'" [errorMsg]="'Confirm password does not match password'">
+        </app-input>
+
         <div class="btn-container">
             <button type="submit">Create Account</button>
         </div>
