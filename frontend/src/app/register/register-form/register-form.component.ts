@@ -13,18 +13,30 @@ export class RegisterFormComponent implements OnInit {
 
     registerForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.maxLength(75)]],
-        lastName: [''],
+        lastName: ['', [Validators.required, Validators.maxLength(75)]],
+        email: ['', [Validators.required, Validators.email]]
     })
 
 
     ngOnInit(): void {
     }
 
+    onSubmit(event: any) {
+        console.log(event)
+        console.log('submitted')
+        event.preventDefault()
+        console.log(this.registerForm.valid)
+        console.log(this.registerForm.value)
+    }
 
     get firstName() {
         return this.registerForm.get('firstName')
     }
     get lastName() {
         return this.registerForm.get('lastName')
+    }
+
+    get email() {
+        return this.registerForm.get('email')
     }
 }

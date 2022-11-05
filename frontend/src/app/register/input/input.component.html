@@ -1,0 +1,10 @@
+<div [formGroup]="group" class="form-group">
+    <label [for]="id">{{label}}</label>
+    <input [formControlName]="controlName" class="input-sm" [id]="id" />
+    <div *ngIf="required">
+        <p class="error">{{label}} is required</p>
+    </div>
+    <div *ngIf="validator">
+        <p class="error">{{errorMsg}}</p>
+    </div>
+</div>

@@ -4,12 +4,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RegisterRoutingModule} from './register-routing.module';
 import {RegisterHomeComponent} from './register-home/register-home.component';
 import {RegisterFormComponent} from './register-form/register-form.component';
+import { InputComponent } from './input/input.component';
 
 
 @NgModule({
     declarations: [
         RegisterHomeComponent,
-        RegisterFormComponent
+        RegisterFormComponent,
+        InputComponent,
     ],
     imports: [
         CommonModule,

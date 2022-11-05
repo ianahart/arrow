@@ -1,0 +1,31 @@
+.error {
+    color: red;
+    font-size: 0.8rem;
+}
+
+
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1.5rem  0;
+}
+
+label {
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+input {
+    border: 1px solid #d8d8de;
+    height: 35px;
+    margin-left: 0.5rem;
+    border-radius: 8px;
+}
+
+.input-sm {
+    width:  90%;
+    margin: 0 0.5rem;
+}
+
+

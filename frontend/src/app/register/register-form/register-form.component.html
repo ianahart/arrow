@@ -2,32 +2,27 @@
     <header>
         <h1>Register</h1>
     </header>
-    <form [formGroup]="registerForm">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
         <div class="row">
-            <div class="form-group">
-                <label for="FirstName">First Name</label>
-                <input formControlName="firstName" class="input-sm" id="firstName" type="text" />
-                <div *ngIf="firstName?.errors?.['required']  && firstName?.touched">
-                    <p class="error">First name is required</p>
-                </div>
-                <div *ngIf="firstName?.errors?.['maxlength'] && 
-                    firstName?.dirty  && 
-                    firstName?.touched">
-                    <p class="error">First name cannot exceed 75 characters</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input formControlName="lastName" class="input-sm" id="lastName" type="text" />
-                <div *ngIf="lastName?.errors?.['required']  && lastName?.touched">
-                    <p class="error">First name is required</p>
-                </div>
-                <div *ngIf="lastName?.errors?.['maxlength'] && 
-                    lastName?.dirty  && 
-                    lastName?.touched">
-                    <p class="error">First name cannot exceed 75 characters</p>
-                </div>
-            </div>
+            <app-input controlName="firstName"
+                [validator]="firstName?.errors?.['maxlength'] && firstName?.dirty && firstName?.touched"
+                [group]="registerForm" [id]="'firstName'"
+                [required]="firstName?.errors?.['required'] && firstName?.touched" [name]="firstName"
+                [label]="'First Name'" [errorMsg]="'First name cannot exceed 75 characters'"></app-input>
+
+            <app-input controlName="lastName"
+                [validator]="lastName?.errors?.['maxlength'] && lastName?.dirty && lastName?.touched"
+                [group]="registerForm" [id]="'lastName'"
+                [required]="lastName?.errors?.['required'] && lastName?.touched" [name]="lastName" [label]="'Last Name'"
+                [errorMsg]="'Last name  cannot exceed 75 characters'"></app-input>
+        </div>
+        <app-input controlName="email" [group]="registerForm" [id]="'email'"
+            [required]="email?.errors?.['required'] && email?.touched" [name]="email" [label]="'Email'"
+            [validator]="email?.errors?.['email']  && email?.dirty && email?.touched"
+            [errorMsg]="'Please provide a valid email address'"></app-input>
+        <div class="btn-container">
+            <button type="submit">Create Account</button>
         </div>
     </form>
 </div>
+{{email?.errors?.email | json}}
