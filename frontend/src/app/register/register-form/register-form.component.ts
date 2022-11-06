@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
-import {ConfirmPasswordValidator} from './confirm-password.validator';
+import {ConfirmPasswordValidator} from 'src/app/validators/confirm-password.validator';
 @Component({
     selector: 'app-register-form',
     templateUrl: './register-form.component.html',
