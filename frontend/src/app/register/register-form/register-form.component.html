@@ -34,18 +34,18 @@
                 <input type="radio" value="nonbinary" formControlName="gender">
                 <span class="radio-checkmark"></span>
             </label>
-            <app-input controlName="password" [group]="registerForm" [type]="'password'" [id]="'password'"
+            <app-input (toggleEvent)="togglePasswordVisibility($event)" [passwordType]="passwordType"
+                controlName="password" [group]="registerForm" [type]="'password'" [id]="'password'"
                 [required]="password?.errors?.['required'] && password?.touched" [name]="password" [label]="'Password'"
                 [validator]="password?.errors?.['pattern'] && password?.dirty && password?.touched"
                 [errorMsg]="'Password must include 1 uppercase, 1 special character , 1 numeric, and must be at least 8 characters long'">
             </app-input>
-            <app-input
-                [validator]="confirmPassword?.errors['confirmPasswordValidator'] && confirmPassword?.dirty  &&  confirmPassword?.touched"
+            <app-input (toggleEvent)="togglePasswordVisibility($event)" [passwordType]="passwordType"
+                [validator]="confirmPassword?.errors?.['confirmPasswordValidator'] && confirmPassword?.dirty  &&  confirmPassword?.touched"
                 controlName="confirmPassword" [group]="registerForm" [type]="'password'" [id]="'confirmPassword'"
                 [required]="confirmPassword?.errors?.['required'] && confirmPassword?.touched" [name]="confirmPassword"
                 [label]="'Confirm Password'" [errorMsg]="'Confirm password does not match password'">
             </app-input>
-
             <div class="btn-container">
                 <button type="submit">Create Account</button>
             </div>

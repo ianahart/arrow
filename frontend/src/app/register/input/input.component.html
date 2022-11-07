@@ -1,9 +1,20 @@
 <div [formGroup]="group" class="form-group">
     <label [for]="id">{{label}}</label>
-    <input [type]="type" [formControlName]="controlName" class="input-sm" [id]="id" />
-    <ng-container *ngIf="required">
+    <div class="input-container">
+        <div class="input-password" *ngIf="controlName.toLowerCase().includes('password'); else standard">
+            <input [type]="passwordType" [formControlName]="controlName" class="input-sm input-password" [id]="id" />
+
+            <div *ngIf="controlName === 'password'" (click)="onClick()" class="icon-container">
+                <fa-icon [icon]="passwordType === 'text' ? faEyeSlash : faEye"></fa-icon>
+            </div>
+        </div>
+        <ng-template #standard>
+            <input [type]="type" [formControlName]="controlName" class="input-sm" [id]="id" />
+        </ng-template>
+    </div>
+    <div *ngIf="required">
         <p class="error">{{label}} is required</p>
-    </ng-container>
+    </div>
     <div *ngIf="validator">
         <p class="error">{{errorMsg}}</p>
     </div>

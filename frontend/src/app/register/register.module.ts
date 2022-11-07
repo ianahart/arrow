@@ -4,8 +4,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RegisterRoutingModule} from './register-routing.module';
 import {RegisterHomeComponent} from './register-home/register-home.component';
 import {RegisterFormComponent} from './register-form/register-form.component';
-import { InputComponent } from './input/input.component';
-
+import {InputComponent} from './input/input.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -17,6 +17,7 @@ import { InputComponent } from './input/input.component';
         CommonModule,
         RegisterRoutingModule,
         ReactiveFormsModule,
+        FontAwesomeModule,
     ]
 })
 export class RegisterModule {}

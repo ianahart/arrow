@@ -1,5 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-input',
@@ -17,10 +18,21 @@ export class InputComponent implements OnInit {
     @Input() controlName = '';
     @Input() errorMsg = '';
     @Input() type = '';
+    @Input() passwordType = 'password';
+
+    @Output() toggleEvent = new EventEmitter<string>();
+
+
+    faEye = faEye;
+    faEyeSlash = faEyeSlash;
+
 
     constructor() {}
 
     ngOnInit(): void {
     }
 
+    onClick() {
+        this.toggleEvent.emit(this.passwordType)
+    }
 }

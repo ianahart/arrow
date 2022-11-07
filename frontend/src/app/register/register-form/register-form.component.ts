@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import {AuthService} from 'src/app/auth.service';
 import {ConfirmPasswordValidator} from 'src/app/validators/confirm-password.validator';
 @Component({
     selector: 'app-register-form',
@@ -8,14 +9,15 @@ import {ConfirmPasswordValidator} from 'src/app/validators/confirm-password.vali
 })
 export class RegisterFormComponent implements OnInit {
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: FormBuilder, private authService: AuthService) {}
 
+    passwordType = 'password';
 
     registerForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.maxLength(75)]],
         lastName: ['', [Validators.required, Validators.maxLength(75)]],
         email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
+        gender: ['woman', [Validators.required]],
         password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]],
         confirmPassword: ['', [Validators.required]]
     },
@@ -31,15 +33,27 @@ export class RegisterFormComponent implements OnInit {
 
     onSubmit(event: any) {
         event.preventDefault()
-        console.log(this.registerForm.errors)
-        console.log(this.registerForm.value)
         if (!this.registerForm.valid) {
-            console.log('Errors present')
             return;
         }
         console.log('Submitted');
-        console.log(this.registerForm.value)
+        this.authService.register(this.registerForm.value).subscribe((response) => {
+            console.log(response)
+        }, (error) => console.log(error))
+
     }
+
+
+    togglePasswordVisibility(event: any) {
+        if (this.passwordType === 'password') {
+            console.log('IFFFFFFFFFFFF')
+            this.passwordType = 'text'
+        } else if (this.passwordType === 'text') {
+            console.log('ELSEEEEEEEEE')
+            this.passwordType = 'password'
+        }
+    }
+
 
     get firstName() {
         return this.registerForm.get('firstName')

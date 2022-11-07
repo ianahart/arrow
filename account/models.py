@@ -52,6 +52,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     first_name = models.CharField(max_length=200, blank=True, null=True)
+    gender = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(_(
         'email address'),
