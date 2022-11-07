@@ -22,6 +22,18 @@
                 [required]="email?.errors?.['required'] && email?.touched" [name]="email" [label]="'Email'"
                 [validator]="email?.errors?.['email']  && email?.dirty && email?.touched"
                 [errorMsg]="'Please provide a valid email address'"></app-input>
+            <label class="radio-container">Woman
+                <input type="radio" value="woman" formControlName="gender" checked="checked">
+                <span class="radio-checkmark"></span>
+            </label>
+            <label class="radio-container">Man
+                <input type="radio" value="man" formControlName="gender">
+                <span class="radio-checkmark"></span>
+            </label>
+            <label class="radio-container">Non-binary
+                <input type="radio" value="nonbinary" formControlName="gender">
+                <span class="radio-checkmark"></span>
+            </label>
             <app-input controlName="password" [group]="registerForm" [type]="'password'" [id]="'password'"
                 [required]="password?.errors?.['required'] && password?.touched" [name]="password" [label]="'Password'"
                 [validator]="password?.errors?.['pattern'] && password?.dirty && password?.touched"

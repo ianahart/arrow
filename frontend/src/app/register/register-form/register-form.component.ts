@@ -15,6 +15,7 @@ export class RegisterFormComponent implements OnInit {
         firstName: ['', [Validators.required, Validators.maxLength(75)]],
         lastName: ['', [Validators.required, Validators.maxLength(75)]],
         email: ['', [Validators.required, Validators.email]],
+        gender: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]],
         confirmPassword: ['', [Validators.required]]
     },
@@ -30,6 +31,8 @@ export class RegisterFormComponent implements OnInit {
 
     onSubmit(event: any) {
         event.preventDefault()
+        console.log(this.registerForm.errors)
+        console.log(this.registerForm.value)
         if (!this.registerForm.valid) {
             console.log('Errors present')
             return;
@@ -54,5 +57,8 @@ export class RegisterFormComponent implements OnInit {
     }
     get confirmPassword() {
         return this.registerForm.get('confirmPassword')
+    }
+    get gender() {
+        return this.registerForm.get('gender');
     }
 }
