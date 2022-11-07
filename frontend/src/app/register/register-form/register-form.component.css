@@ -4,6 +4,11 @@
     height:100%;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .container  {
     background: #fff;
     padding: 0.5rem;
@@ -110,4 +115,25 @@ button:hover {
         width:  600px;
         margin: 0 auto;
     }
+    .aside  {
+        display: none;
+        width:  600px;
+        margin:0 auto;
+    }
+    .wrapper {
+        flex-direction: column;
+    }
 }
+
+
+@media(max-width: 604px) {
+    .aside {
+        display: none;
+    }
+    .container  {
+        width:  100%;
+    }
+}
+
+
+

@@ -10,18 +10,21 @@
 
 }
 
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: 1280px;
-}
 
+@media(max-width:604px) {
+    :host  {
+        display:block;
+        width: 95%;
+        margin: 0 auto;
+    }
+}
 
 
 @media (max-width: 1000px) {
-    .aside {
-        display: none;
+    .content {
+    display: flex;
+    flex-direction: column;
+
     }
 }
+
