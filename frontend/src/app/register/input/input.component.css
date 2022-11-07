@@ -11,6 +11,12 @@
     margin: 1.5rem  0;
 }
 
+
+.form-group {
+    flex-direction: column;
+    display: flex;
+}
+
 label {
     margin-bottom: 0.25rem;
     margin-left: 0.5rem;

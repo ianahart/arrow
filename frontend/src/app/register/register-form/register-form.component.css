@@ -1,23 +1,38 @@
 :host {
     margin-top: 5rem;
     width:  100%;
+    height:100%;
 }
 
 .container  {
     background: #fff;
-    border-radius: 8px;
     padding: 0.5rem;
     padding-top: 3rem;
-    min-height: 600px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width:100%;
-    margin-bottom: 1.5rem;
+    min-height: 850px;
 }
+
+
+.aside {
+    background-image: url('../../../assets/register-2.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 650px;
+    padding: 0.5rem;
+    padding-top: 3rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+
 
 
 h1  {
     font-size: 1.5rem;
     font-weight: 400;
+    text-align: center;
 }
 
 

@@ -1,4 +1,4 @@
-.container {
+:host {
     background-image: url('../../../assets/login.svg');
     background-position: center;
     background-size: cover;
@@ -18,20 +18,7 @@
     width: 1280px;
 }
 
-.aside {
-    background-image: url('../../../assets/register-2.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 650px;
-    padding: 0.5rem;
-    padding-top: 3rem;
-    min-height: 600px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    margin-bottom: 1.5rem;
-    margin-top: 5rem;
 
-}
 
 @media (max-width: 1000px) {
     .aside {

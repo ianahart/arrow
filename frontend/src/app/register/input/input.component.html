@@ -1,9 +1,9 @@
 <div [formGroup]="group" class="form-group">
     <label [for]="id">{{label}}</label>
     <input [type]="type" [formControlName]="controlName" class="input-sm" [id]="id" />
-    <div *ngIf="required">
+    <ng-container *ngIf="required">
         <p class="error">{{label}} is required</p>
-    </div>
+    </ng-container>
     <div *ngIf="validator">
         <p class="error">{{errorMsg}}</p>
     </div>

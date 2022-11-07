@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RepeatPasswordDirective } from './repeat-password.directive';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+
 
 
 
 @NgModule({
-  declarations: [
-    RepeatPasswordDirective
-  ],
-  imports: [
-    CommonModule
-  ]
+    declarations: [
+
+    ],
+    imports: [
+        CommonModule
+    ]
 })
-export class SharedModule { }
+export class SharedModule {}
