@@ -2,6 +2,15 @@ from rest_framework import serializers
 from account.models import CustomUser
 
 
+class LoginSerializer(serializers.ModelSerializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('password', 'email', )
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(
         error_messages={'blank': 'Confirm password may not be  blank.'})

@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, date
-from typing import Union
+from typing import Dict, Union
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractUser, PermissionsMixin
@@ -13,9 +13,45 @@ from django.core.mail import EmailMessage
 from core import settings
 import logging
 logger = logging.getLogger('django')
+# pyright: reportGeneralTypeIssues=false
 
 
 class CustomUserManager(BaseUserManager):
+
+    def login(self, data: Dict[str, str]):
+        res = {}
+
+        password, email = data.values()
+
+        user_exists = self.user_by_email(email)
+
+        if user_exists is None:
+            res['type'] = 'error'
+            res['data'] = 'User does not exist.'
+            return res
+
+        if not hashers.check_password(password, user_exists.password):
+            res['type'] = 'error'
+            res['data'] = 'Invalid credentials.'
+            return res
+
+        refresh_token = RefreshToken.for_user(user_exists)
+        access_token = refresh_token.access_token
+        access_token.set_exp(lifetime=timedelta(days=3))
+
+        tokens = {
+            'access_token':  str(access_token),
+            'refresh_token': str(refresh_token)
+        }
+
+        user_exists.logged_in = True
+        user_exists.save()
+        user_exists.refresh_from_db()
+
+        res['type'] = 'ok'
+        res['data'] = {'tokens': tokens, 'user': user_exists}
+
+        return res
 
     def user_by_email(self, email):
         return CustomUser.objects.all().filter(email=email).first()

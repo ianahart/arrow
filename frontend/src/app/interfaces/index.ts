@@ -6,3 +6,8 @@ export interface IRegisterForm {
     password: string;
     confirm_password: string;
 }
+
+export interface ILoginForm {
+    email?: string | null | undefined;
+    password?: string | null | undefined;
+}

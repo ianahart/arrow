@@ -1,1 +1,33 @@
-<p>login-home works!</p>
+<div class="container">
+    <div class="form-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+            <header>
+                <h1>Login</h1>
+            </header>
+            <div class="server-errors">
+                <p *ngFor="let error of errors">{{error}}</p>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input formControlName="email" type="email" />
+                <ng-container *ngIf="email?.errors">
+                    <div class="error" *ngIf="email?.errors['required'] && email?.touched">
+                        <p>Email field is required</p>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input formControlName="password" type="password" />
+                <ng-container *ngIf="password?.errors">
+                    <div class="error" *ngIf="password?.errors['required'] && password?.touched">
+                        <p>Password field is required</p>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="btn-container">
+                <button class="primary-btn">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
