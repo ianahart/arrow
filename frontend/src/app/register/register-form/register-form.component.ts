@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/auth.service';
-import {ConfirmPasswordValidator} from 'src/app/validators/confirm-password.validator';
+import {MatchPassword} from 'src/app/validators/match-password';
 @Component({
     selector: 'app-register-form',
     templateUrl: './register-form.component.html',
@@ -9,7 +9,7 @@ import {ConfirmPasswordValidator} from 'src/app/validators/confirm-password.vali
 })
 export class RegisterFormComponent implements OnInit {
 
-    constructor(private fb: FormBuilder, private authService: AuthService) {}
+    constructor(private fb: FormBuilder, private authService: AuthService, private matchPassword: MatchPassword) {}
 
     passwordType = 'password';
 
@@ -22,7 +22,7 @@ export class RegisterFormComponent implements OnInit {
         confirmPassword: ['', [Validators.required]]
     },
         {
-            validator: ConfirmPasswordValidator("password", "confirmPassword")
+            validator: [this.matchPassword.validate]
         }
     )
 
@@ -46,10 +46,8 @@ export class RegisterFormComponent implements OnInit {
 
     togglePasswordVisibility(event: any) {
         if (this.passwordType === 'password') {
-            console.log('IFFFFFFFFFFFF')
             this.passwordType = 'text'
         } else if (this.passwordType === 'text') {
-            console.log('ELSEEEEEEEEE')
             this.passwordType = 'password'
         }
     }

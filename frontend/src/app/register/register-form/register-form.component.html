@@ -41,7 +41,7 @@
                 [errorMsg]="'Password must include 1 uppercase, 1 special character , 1 numeric, and must be at least 8 characters long'">
             </app-input>
             <app-input (toggleEvent)="togglePasswordVisibility($event)" [passwordType]="passwordType"
-                [validator]="confirmPassword?.errors?.['confirmPasswordValidator'] && confirmPassword?.dirty  &&  confirmPassword?.touched"
+                [validator]="registerForm?.errors?.['passwordDontMatch'] && confirmPassword?.dirty  && confirmPassword?.touched"
                 controlName="confirmPassword" [group]="registerForm" [type]="'password'" [id]="'confirmPassword'"
                 [required]="confirmPassword?.errors?.['required'] && confirmPassword?.touched" [name]="confirmPassword"
                 [label]="'Confirm Password'" [errorMsg]="'Confirm password does not match password'">
