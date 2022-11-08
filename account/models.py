@@ -17,6 +17,9 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def user_by_email(self, email):
+        return CustomUser.objects.all().filter(email=email).first()
+
     def create(self, email: str, password: str, **extra_fields) -> None:
         """
         Create and save a User with the given email and password.
@@ -51,6 +54,9 @@ class CustomUser(AbstractUser, PermissionsMixin):
     avatar_url = models.URLField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+    latitude = models.CharField(max_length=100, blank=True, null=True)
+    longitude = models.CharField(max_length=100, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
     first_name = models.CharField(max_length=200, blank=True, null=True)
     gender = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)

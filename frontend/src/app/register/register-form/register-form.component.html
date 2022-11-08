@@ -5,6 +5,9 @@
             <h1>Register</h1>
         </header>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
+            <div class="server-errors">
+                <p *ngFor="let error of errors">{{error}}</p>
+            </div>
             <div class="row">
                 <app-input controlName="firstName" [type]="'type'"
                     [validator]="firstName?.errors?.['maxlength'] && firstName?.dirty && firstName?.touched"

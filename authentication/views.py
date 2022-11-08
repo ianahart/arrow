@@ -10,6 +10,8 @@ from account.models import CustomUser
 import json
 import logging
 
+from authentication.serializers import RegisterSerializer
+
 logger = logging.getLogger('django')
 
 
@@ -21,6 +23,11 @@ class RegisterAPIView(APIView):
 
     def post(self, request):
         try:
+            serializer = RegisterSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            serializer.create(serializer.validated_data)
+
             return Response({
                 'message': 'success'
             }, status=status.HTTP_200_OK)

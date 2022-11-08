@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/auth.service';
 import {MatchPassword} from 'src/app/validators/match-password';
@@ -9,9 +10,13 @@ import {MatchPassword} from 'src/app/validators/match-password';
 })
 export class RegisterFormComponent implements OnInit {
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private matchPassword: MatchPassword) {}
+    constructor(private fb: FormBuilder,
+        private authService: AuthService,
+        private matchPassword: MatchPassword,
+        private router: Router) {}
 
     passwordType = 'password';
+    errors: string[] = []
 
     registerForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.maxLength(75)]],
@@ -27,21 +32,40 @@ export class RegisterFormComponent implements OnInit {
     )
 
 
-    ngOnInit(): void {
+    ngOnInit(): void {}
+
+
+    formValues() {
+        return {
+            first_name: this.registerForm.value.firstName,
+            last_name: this.registerForm.value.lastName,
+            email: this.registerForm.value.email,
+            gender: this.registerForm.value.gender,
+            password: this.registerForm.value.password,
+            confirm_password: this.registerForm.value.confirmPassword
+        }
     }
 
 
     onSubmit(event: any) {
         event.preventDefault()
+        this.errors = []
         if (!this.registerForm.valid) {
             return;
         }
-        console.log('Submitted');
-        this.authService.register(this.registerForm.value).subscribe((response) => {
-            console.log(response)
-        }, (error) => console.log(error))
+        this.authService.register(this.formValues()).subscribe((response) => {
+            this.router.navigate(['/'])
+        }, (error) => this.applyErrors(error))
+
 
     }
+
+    applyErrors({error}: any) {
+        for (const [_, val] of Object.entries(error.errors)) {
+            this.errors.push(val as string)
+        }
+    }
+
 
 
     togglePasswordVisibility(event: any) {
