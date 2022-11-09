@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IRegisterForm, ILoginForm} from './interfaces';
+import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse} from './interfaces';
+import {Observable} from 'rxjs';
+import {userState} from './data';
+
 
 @Injectable({
     providedIn: 'root'
@@ -8,16 +11,37 @@ import {IRegisterForm, ILoginForm} from './interfaces';
 
 export class AuthService {
     private baseURL = 'http://localhost:4200/api/v1'
+    private user: IUser = userState;
 
     constructor(private http: HttpClient) {}
 
 
+    setTokens(tokens: ITokens) {
+        localStorage.setItem('tokens', JSON.stringify(tokens))
+    }
+
+    getUser() {
+        return this.user;
+    }
+
+    setUser(user: IUser) {
+        this.user = user
+    }
+
+    getTokens() {
+        return JSON.parse(localStorage.getItem('tokens') ?? '')
+    }
 
     register(data: IRegisterForm) {
         return this.http.post(`${this.baseURL}/auth/signup/`, data)
     }
 
-    login(data: ILoginForm) {
-        return this.http.post(`${this.baseURL}/auth/signin/`, data)
+    login(data: ILoginForm): Observable<ILoginResponse> {
+        return this.http.post<ILoginResponse>(`${this.baseURL}/auth/signin/`, data)
+    }
+
+    syncUser() {
+        const tokens = this.getTokens()
+        return this.http.get<IRefreshUserResponse>(`${this.baseURL}/account/refresh/`, {headers: {'Authorization': `Bearer ${tokens.access_token}`}})
     }
 }

@@ -37,6 +37,8 @@ export class LoginHomeComponent implements OnInit {
             return;
         }
         this.authService.login(this.loginForm.value).subscribe((response) => {
+            this.authService.setTokens(response.tokens);
+            this.authService.setUser(response.user);
             console.log(response)
 
         }, (err) => {
