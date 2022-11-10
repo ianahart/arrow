@@ -1,4 +1,5 @@
 export const userState = {
+    id: 0,
     avatar_url: '',
     created_at: new Date(),
     email: '',

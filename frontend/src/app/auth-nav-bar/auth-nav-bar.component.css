@@ -1,0 +1,27 @@
+nav {
+    color: #fff;
+    background-color: var(--purple);
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.user-icon {
+    font-size: 2.75rem;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+
+.user-icon-container {
+    color: #fff;
+}
+

@@ -11,4 +11,5 @@ class UserSerializer(serializers.ModelSerializer):
                   'created_at', 'location',
                   'first_name', 'gender',
                   'last_name', 'email',
+                  'id',
                   )

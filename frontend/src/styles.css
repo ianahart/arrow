@@ -3,13 +3,14 @@
     --purple:#6C4AB6;
     --light-purple: #8D72E1;
     --teal: #B9E0FF;
+    --gray: #62788d;
+
 }
 
 
 * {
    box-sizing: border-box;
    font-family: Montserrat;
-   color: #62788d;
   }
 
 body  {
@@ -17,6 +18,9 @@ body  {
 }
 
 
+label {
+    color: var(--gray);
+}
 
 
 .primary-btn {

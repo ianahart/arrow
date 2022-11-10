@@ -1,9 +1,13 @@
 <div class="container">
-    <app-nav-bar></app-nav-bar>
+    <ng-container *ngIf="!loggedIn">
+        <app-nav-bar></app-nav-bar>
+    </ng-container>
+    <ng-container *ngIf="loggedIn">
+        <app-auth-nav-bar></app-auth-nav-bar>
+    </ng-container>
     <div class="content">
         <div class="router-container">
             <router-outlet></router-outlet>
-
         </div>
     </div>
     <app-footer></app-footer>

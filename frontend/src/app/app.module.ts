@@ -7,12 +7,14 @@ import {FooterComponent} from './footer/footer.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { AuthNavBarComponent } from './auth-nav-bar/auth-nav-bar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         FooterComponent,
-        NavBarComponent
+        NavBarComponent,
+        AuthNavBarComponent
     ],
     imports: [
         BrowserModule,

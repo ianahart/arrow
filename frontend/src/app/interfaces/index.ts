@@ -19,6 +19,7 @@ export interface ITokens {
 
 
 export interface IUser {
+    id: number;
     avatar_url: string;
     created_at: Date;
     email: string;
