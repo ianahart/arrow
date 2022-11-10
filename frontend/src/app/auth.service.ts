@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse} from './interfaces';
+import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse} from './interfaces';
 import {Observable, BehaviorSubject, tap} from 'rxjs';
 import {userState} from './data';
 
@@ -20,7 +20,7 @@ export class AuthService {
     }
 
 
-    setTokens(tokens: ITokens) {
+    setTokens(tokens: ITokens | null) {
         localStorage.setItem('tokens', JSON.stringify(tokens))
     }
 
@@ -50,12 +50,44 @@ export class AuthService {
 
     syncUser() {
         const tokens = this.getTokens()
-        return this.http.get<IRefreshUserResponse>(`${this.baseURL}/account/refresh/`, {headers: {'Authorization': `Bearer ${tokens.access_token}`}}).pipe(
+        return this.http.get<IRefreshUserResponse>(`${this.baseURL}/account/refresh/`,
+            {headers: {'Authorization': `Bearer ${tokens.access_token}`}}).pipe(
+                tap(() => {
+                    if (tokens) {
+                        this.loggedIn$.next(true)
+                    }
+                })
+            )
+    }
+
+
+    logout() {
+        const tokens = this.getTokens()
+        return this.http.post<ILogoutResponse>(`${this.baseURL}/auth/signout/`,
+            {refresh_token: tokens.refresh_token}, {
+            headers: {'Authorization': `Bearer ${tokens.access_token}`}
+        }).pipe(
             tap(() => {
-                if (tokens) {
-                    this.loggedIn$.next(true)
-                }
+                this.loggedIn$.next(false)
             })
         )
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

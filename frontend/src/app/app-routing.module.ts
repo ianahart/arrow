@@ -12,7 +12,12 @@ const routes: Routes = [
             const dyamicImport = await import('./register/register.module')
             return dyamicImport.RegisterModule
         }
-
+    },
+    {
+        path: 'arrow', loadChildren: async () => {
+            const dyamicImport = await import('./arrow/arrow.module');
+            return dyamicImport.ArrowModule;
+        }
     }
 ];
 

@@ -18,6 +18,15 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def logout(self, id: int, refresh_token):
+
+        user = CustomUser.objects.get(pk=id)
+        user.logged_in = False
+        user.save()
+
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+
     def refresh_user(self, user: 'CustomUser', authorization: str):
         access_token = authorization.split('Bearer ')[1]
         decoded_token = None

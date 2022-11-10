@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/auth.service';
 @Component({
@@ -8,7 +9,11 @@ import {AuthService} from 'src/app/auth.service';
 })
 export class LoginHomeComponent implements OnInit {
 
-    constructor(private fb: FormBuilder, private authService: AuthService) {}
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private router: Router
+    ) {}
 
 
 
@@ -39,7 +44,8 @@ export class LoginHomeComponent implements OnInit {
         this.authService.login(this.loginForm.value).subscribe((response) => {
             this.authService.setTokens(response.tokens);
             this.authService.setUser(response.user);
-            console.log(response)
+            this.router.navigate(['/', 'arrow'])
+
 
         }, (err) => {
             this.applyErrors(err)

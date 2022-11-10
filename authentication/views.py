@@ -11,9 +11,33 @@ import json
 import logging
 from account.serializers import UserSerializer
 
-from authentication.serializers import LoginSerializer, RegisterSerializer
+from authentication.serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
 
 logger = logging.getLogger('django')
+
+
+class LogoutAPIView(APIView):
+    """
+        A view for logging a user out of the application.
+    """
+
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+        try:
+            serializer = LogoutSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            CustomUser.objects.logout(
+                request.user.id, serializer.validated_data['refresh_token'])  # pyright: ignore
+            return Response({
+                'message': 'success',
+            }, status=status.HTTP_200_OK)
+
+        except ParseError:
+            return Response({
+                'error': 'Unable to log you out at this time.'
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterAPIView(APIView):

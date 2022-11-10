@@ -33,6 +33,10 @@ export interface IUser {
 }
 
 
+export interface ILogoutResponse {
+    message?: string;
+}
+
 export interface ILoginResponse {
     message?: string;
     tokens: ITokens;
