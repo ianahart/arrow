@@ -22,9 +22,6 @@ export class AuthNavBarComponent implements OnInit {
 
 
     onLogout() {
-
-        console.log('logged out')
-
         this.authService.logout().subscribe(() => {
             this.authService.setTokens(null)
             this.authService.setUser(userState)

@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import {ArrowService} from '../arrow.service';
 @Component({
-  selector: 'app-arrow-home',
-  templateUrl: './arrow-home.component.html',
-  styleUrls: ['./arrow-home.component.css']
+    selector: 'app-arrow-home',
+    templateUrl: './arrow-home.component.html',
+    styleUrls: ['./arrow-home.component.css']
 })
 export class ArrowHomeComponent implements OnInit {
 
-  constructor() { }
+    constructor(private arrowService: ArrowService) {}
 
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {
+        this.arrowService.loadMatch().subscribe((response) => {
+            console.log(response)
+        })
+    }
 }

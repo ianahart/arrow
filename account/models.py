@@ -62,7 +62,8 @@ class CustomUserManager(BaseUserManager):
 
         refresh_token = RefreshToken.for_user(user_exists)
         access_token = refresh_token.access_token
-        access_token.set_exp(lifetime=timedelta(days=3))
+        # access_token.set_exp(lifetime=timedelta(days=3))
+        access_token.set_exp(lifetime=timedelta(minutes=1))
 
         tokens = {
             'access_token':  str(access_token),

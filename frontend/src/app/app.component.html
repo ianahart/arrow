@@ -1,8 +1,8 @@
 <div class="container">
-    <ng-container *ngIf="!loggedIn">
+    <ng-container *ngIf="!(loggedIn$  | async)">
         <app-nav-bar></app-nav-bar>
     </ng-container>
-    <ng-container *ngIf="loggedIn">
+    <ng-container *ngIf="loggedIn$  | async">
         <app-auth-nav-bar></app-auth-nav-bar>
     </ng-container>
     <div class="content">

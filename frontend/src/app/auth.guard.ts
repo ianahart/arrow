@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, take, tap, map, skipWhile} from 'rxjs';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
 @Injectable({
@@ -14,17 +14,23 @@ export class AuthGuard implements CanActivate {
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        this.authService.loggedIn$.subscribe((loggedIn) => {
-            this.loggedIn = loggedIn
-        })
+        //@ts-ignore
+        return this.authService.loggedIn$.pipe(
+            skipWhile(value => value === null),
+            take(1),
+            map(isAuthenticated => {
+                console.log('Authenticated: ', isAuthenticated)
+                if (!isAuthenticated) {
+                    this.router.navigate(['/']);
+                }
 
+                return isAuthenticated;
+            })
+        )
 
-        if (!this.loggedIn) {
-            this.router.navigate(['/'])
-        }
-        return this.loggedIn
 
     }
 
 
 }
+

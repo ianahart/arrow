@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse} from './interfaces';
 import {Observable, BehaviorSubject, tap} from 'rxjs';
 import {userState} from './data';
+import {catchError, of} from 'rxjs';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import {userState} from './data';
 export class AuthService {
     private baseURL = 'http://localhost:4200/api/v1'
     private user: IUser = userState;
-    loggedIn$ = new BehaviorSubject(false);
+    loggedIn$ = new BehaviorSubject<boolean | null>(null);
 
 
     constructor(private http: HttpClient) {
@@ -33,7 +34,10 @@ export class AuthService {
     }
 
     getTokens() {
-        return JSON.parse(localStorage.getItem('tokens') ?? '')
+        if (localStorage.getItem('tokens')) {
+            return JSON.parse(localStorage.getItem('tokens') || '')
+
+        }
     }
 
     register(data: IRegisterForm) {
@@ -51,21 +55,39 @@ export class AuthService {
     syncUser() {
         const tokens = this.getTokens()
         return this.http.get<IRefreshUserResponse>(`${this.baseURL}/account/refresh/`,
-            {headers: {'Authorization': `Bearer ${tokens.access_token}`}}).pipe(
+            {headers: {'Authorization': `Bearer ${tokens?.access_token}`}}).pipe(
                 tap(() => {
                     if (tokens) {
                         this.loggedIn$.next(true)
+                    } else {
+                        this.loggedIn$.next(false)
                     }
                 })
             )
     }
 
+    refreshToken() {
+        const tokens = this.getTokens()
+        return this.http
+            .post<any>(`${this.baseURL}/auth/refresh/`, {
+                refresh: tokens.refresh_token,
+            })
+            .pipe(
+                tap((token) => {
+                    tokens.access_token = token.access
+                    this.setTokens(tokens)
+                }),
+                catchError((error) => {
+                    this.logout()
+                    return of(false);
+                })
+            );
+    }
 
     logout() {
         const tokens = this.getTokens()
         return this.http.post<ILogoutResponse>(`${this.baseURL}/auth/signout/`,
             {refresh_token: tokens.refresh_token}, {
-            headers: {'Authorization': `Bearer ${tokens.access_token}`}
         }).pipe(
             tap(() => {
                 this.loggedIn$.next(false)
