@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
             skipWhile(value => value === null),
             take(1),
             map(isAuthenticated => {
-                console.log('Authenticated: ', isAuthenticated)
                 if (!isAuthenticated) {
                     this.router.navigate(['/']);
                 }
