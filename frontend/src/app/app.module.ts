@@ -9,6 +9,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AuthNavBarComponent} from './auth-nav-bar/auth-nav-bar.component';
 import {AuthHttpInterceptor} from './auth-http-interceptor';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {AuthHttpInterceptor} from './auth-http-interceptor';
         ReactiveFormsModule,
         HttpClientModule,
         FontAwesomeModule,
+        SharedModule,
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}

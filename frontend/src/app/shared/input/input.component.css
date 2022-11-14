@@ -1,0 +1,24 @@
+.form-group {
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    margin: 4rem auto;
+}
+
+
+label {
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+input {
+    border: 1px solid #d8d8de;
+    height: 35px;
+    margin-left: 0.5rem;
+    border-radius: 8px;
+}
+
+.error {
+    font-size: 0.85rem;
+    color:  red;
+}

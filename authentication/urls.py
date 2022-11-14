@@ -6,6 +6,6 @@ urlpatterns = [
     path('auth/signin/', views.TokenObtainPairView.as_view()),
     path('auth/signout/', views.LogoutAPIView.as_view()),
     path('auth/refresh/', TokenRefreshView.as_view()),
-    #    path('auth/forgot-password/', views.ForgotPasswordAPIView.as_view()),
-    #    path('auth/reset-password/<int:pk>/', views.PasswordResetAPIView.as_view()),
+    path('auth/forgot-password/', views.ForgotPasswordAPIView.as_view()),
+    path('auth/reset-password/<int:pk>/', views.PasswordResetAPIView.as_view()),
 ]

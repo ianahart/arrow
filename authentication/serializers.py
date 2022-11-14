@@ -2,6 +2,19 @@ from rest_framework import serializers
 from account.models import CustomUser
 
 
+class PasswordResetSerializer(serializers.Serializer):
+    uid = serializers.IntegerField()
+    token = serializers.CharField()
+    password = serializers.CharField()
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.CharField()
+
+    class Meta:
+        fields = ('email', )
+
+
 class LogoutSerializer(serializers.Serializer):
     refresh_token = serializers.CharField()
 

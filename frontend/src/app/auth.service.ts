@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse} from './interfaces';
+import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse, IForgotPasswordForm, IPasswordResetForm} from './interfaces';
 import {Observable, BehaviorSubject, tap} from 'rxjs';
 import {userState} from './data';
 import {catchError, of} from 'rxjs';
@@ -82,6 +82,17 @@ export class AuthService {
                     return of(false);
                 })
             );
+    }
+
+    forgotPasswordEmail(forgotPasswordForm: Partial<IForgotPasswordForm>) {
+
+        return this.http.post(`${this.baseURL}/auth/forgot-password/`, {
+            email: forgotPasswordForm.email,
+        })
+    }
+
+    resetPassword(resetPasswordForm: IPasswordResetForm) {
+        return this.http.patch(`${this.baseURL}/auth/reset-password/${resetPasswordForm.uid}/`, resetPasswordForm)
     }
 
     logout() {

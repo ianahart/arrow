@@ -18,6 +18,33 @@ logger = logging.getLogger('django')
 
 class CustomUserManager(BaseUserManager):
 
+    def send_forgot_email(self, id: int, data):
+
+        try:
+            user = CustomUser.objects.filter(email=data['email']).first()
+            if user is None:
+                raise models.ObjectDoesNotExist
+
+            token = RefreshToken.for_user(user)
+            context = {'user': user.first_name, 'uid': user.id, 'token': token}
+            message = render_to_string('forgot-password.html', context)
+            refresh = str(token)
+
+            mail = EmailMessage(
+                subject="Password reset",
+                body=message,
+                from_email=settings.EMAIL_SENDER,
+                to=[data['email']]
+            )
+            mail.content_subtype = 'html'
+            mail.send()
+
+            return {'type': 'ok', 'data': {'uid': user.id, 'token': refresh}}
+
+        except (models.ObjectDoesNotExist):
+            logger.error('Unable to send password reset email')
+            return {'type': 'error', 'data': 'Email address does not exist.'}
+
     def logout(self, id: int, refresh_token):
 
         user = CustomUser.objects.get(pk=id)
