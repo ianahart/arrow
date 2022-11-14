@@ -1,0 +1,16 @@
+<div [formGroup]="group" class="form-group">
+    <label>{{ label }}</label>
+    <input [formControlName]="id" [placeholder]="placeholder" [type]="type" [id]="id" />
+    <p class="error" *ngIf="control.errors?.['required'] && control.touched">This field is required</p>
+    <p class="error" *ngIf="type === 'email' && control.errors?.['email'] && control.touched  && control.dirty">
+        Please provide a valid
+        email address</p>
+    <p class="error" *ngIf="type === 'password' && control.errors?.['pattern'] && control.touched  && control.dirty">
+        Password must include 1 uppercase, 1 digit and 1 special character.
+    </p>
+    <p class="error" *ngIf="type  === 'password' && id === 'confirmPassword' && control &&
+        group?.errors?.['passwordDontMatch'] && control?.dirty && control?.touched">
+        Passwords do not match.
+    </p>
+
+</div>

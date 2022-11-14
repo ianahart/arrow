@@ -2,6 +2,7 @@
     background-image: url('../../../assets/register.svg');
     background-position: center;
     background-size: cover;
+    padding-top:3rem;
     background-repeat: no-repeat;
     min-height: 100vh;
 }
@@ -34,9 +35,9 @@ h1 {
     background: #fff;
     padding: 0.5rem;
     padding-top: 3rem;
+    margin: 0 auto;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width:400px;
-    margin: 0 auto;
     min-height: 600px;
 }
 

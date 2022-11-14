@@ -1,3 +1,17 @@
+import {AbstractControl} from "@angular/forms";
+
+export interface IForgotPasswordForm {
+    email: string | null;
+}
+
+export interface IPasswordResetForm {
+    uid: number;
+    token: string;
+    password: AbstractControl<any, any> | null;
+}
+
+
+
 export interface IRegisterForm {
     first_name: string;
     last_name: string;

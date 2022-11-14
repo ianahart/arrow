@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
+import {ResetPasswordHomeComponent} from './forgot-password/reset-password-home/reset-password-home.component';
 const routes: Routes = [
     {
         path: '', loadChildren: async () => {
@@ -18,6 +19,15 @@ const routes: Routes = [
             const dyamicImport = await import('./arrow/arrow.module');
             return dyamicImport.ArrowModule;
         }
+    },
+    {
+        path: 'forgot-password', loadChildren: async () => {
+            const dyamicImport = await import('./forgot-password/forgot-password.module');
+            return dyamicImport.ForgotPasswordModule;
+        }
+    },
+    {
+        path: 'reset-password', component: ResetPasswordHomeComponent,
     }
 ];
 

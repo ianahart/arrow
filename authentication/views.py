@@ -10,10 +10,65 @@ from account.models import CustomUser
 import json
 import logging
 from account.serializers import UserSerializer
+from authentication.models import PasswordReset
 
-from authentication.serializers import LoginSerializer, LogoutSerializer, RegisterSerializer
+from authentication.serializers import ForgotPasswordSerializer, LoginSerializer, LogoutSerializer, PasswordResetSerializer, RegisterSerializer
 
 logger = logging.getLogger('django')
+
+
+class PasswordResetAPIView(APIView):
+    permission_classes = [AllowAny, ]
+
+    def patch(self, request, pk: int):
+
+        try:
+            serializer = PasswordResetSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            result = PasswordReset.objects.reset_password(
+                serializer.validated_data, pk)
+            if result['type'] == 'error':
+                raise ParseError(result['error'])
+
+            return Response({
+                'message': 'success'
+            }, status=status.HTTP_200_OK)
+        except ParseError as e:
+            return Response({
+                'error':  e.detail,
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ForgotPasswordAPIView(APIView):
+    """
+        A view for sending a password reset email.
+    """
+    permission_classes = [AllowAny, ]
+
+    def post(self, request):
+        try:
+            serializer = ForgotPasswordSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+
+            data = CustomUser.objects.send_forgot_email(
+                request.user.id, serializer.validated_data)
+
+            if data['type'] == 'error':
+                raise ObjectDoesNotExist(data['data'])
+
+            user = CustomUser.objects.get(
+                pk=data['data']['uid'])  # type:ignore
+            PasswordReset.objects.create(data, user)
+
+            return Response({
+                'message': 'success'
+            }, status=status.HTTP_200_OK)
+
+        except (BadRequest, ObjectDoesNotExist, ) as e:
+            return Response({
+                'errors': {'email': [str(e)]},
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LogoutAPIView(APIView):
