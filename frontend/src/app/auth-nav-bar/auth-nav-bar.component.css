@@ -24,5 +24,36 @@ button {
 
 .user-icon-container {
     color: #fff;
+    position: relative;
+    cursor: pointer;
 }
+
+
+.menu-content {
+    color: var(--gray);
+}
+
+
+.menu-tab {
+    background-color: var(--teal);
+    min-height: 40px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.menu-tab p {
+    margin: 0;
+    padding: 0.25rem;
+    text-align: center;
+    color: var(--gray);
+}
+
+.menu-content {
+    padding: 0.5rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+
 

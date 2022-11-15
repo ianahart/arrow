@@ -1,0 +1,16 @@
+.container {
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    min-height: 350px;
+    width:  180px;
+    position: absolute;
+    top: 50px;
+    right:  0px;
+    border-radius: 8px;
+}
+
+.container p {
+    color: var(--gray);
+    text-align: center;
+}
+
