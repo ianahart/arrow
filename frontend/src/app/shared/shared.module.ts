@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {InputComponent} from './input/input.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { ClickAwayMenuComponent } from './click-away-menu/click-away-menu.component';
+import {ClickAwayMenuComponent} from './click-away-menu/click-away-menu.component';
 
 
 
@@ -11,7 +11,7 @@ import { ClickAwayMenuComponent } from './click-away-menu/click-away-menu.compon
 
 
         InputComponent,
-          ClickAwayMenuComponent
+        ClickAwayMenuComponent
     ],
     imports: [
         CommonModule,
@@ -19,6 +19,7 @@ import { ClickAwayMenuComponent } from './click-away-menu/click-away-menu.compon
     ],
     exports: [
         InputComponent,
+        ClickAwayMenuComponent,
     ]
 })
 export class SharedModule {}

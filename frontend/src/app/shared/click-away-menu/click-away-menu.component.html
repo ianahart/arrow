@@ -1,1 +1,6 @@
-<p>click-away-menu works!</p>
+<div [style.minHeight.px]={minHeight} [style.width.px]="180" [style.top.px]="50" [style.right.px]="0" *ngIf="menuOpen"
+    (click)="onPageClick($event)" class="container">
+    <ng-content>
+
+    </ng-content>
+</div>

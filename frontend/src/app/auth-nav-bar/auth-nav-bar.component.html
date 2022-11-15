@@ -1,6 +1,17 @@
 <nav>
     <button (click)="onLogout()">Logout</button>
-    <div class="user-icon-container">
+    <div (click)="setMenuOpen(true)" id="menuTrigger" class="user-icon-container">
         <fa-icon class="user-icon" [icon]="faCircleUser"></fa-icon>
+        <app-click-away-menu [top]="50" [right]="0" (menuOpenEvent)="setMenuOpen(false)" [menuOpen]="menuOpen"
+            [minHeight]="350" [width]="180">
+            <div class="menu-container">
+                <div class="menu-tab">
+                    <p>{{ user.first_name + ' ' + user.last_name| titlecase }}</p>
+                </div>
+                <div class="menu-content">
+                    <p>Settings</p>
+                </div>
+            </div>
+        </app-click-away-menu>
     </div>
 </nav>
