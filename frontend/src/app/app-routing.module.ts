@@ -28,7 +28,14 @@ const routes: Routes = [
     },
     {
         path: 'reset-password', component: ResetPasswordHomeComponent,
-    }
+    },
+    {
+        path: 'settings', canActivate: [AuthGuard], loadChildren: async () => {
+            const dyamicImport = await import('./settings/settings.module');
+            return dyamicImport.SettingsModule;
+        }
+
+    },
 ];
 
 @NgModule({
