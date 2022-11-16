@@ -11,8 +11,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from django.core.mail import EmailMessage
 from core import settings
+from service.geolocation import geoloc
 import logging
 logger = logging.getLogger('django')
+
 # pyright: reportGeneralTypeIssues=false
 
 
@@ -112,6 +114,14 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a User with the given email and password.
         """
+        loc = geoloc.get_location()
+
+        extra_fields['city'] = loc['city']
+        extra_fields['state'] = loc['region']
+        extra_fields['ip_address'] = loc['ip']
+        extra_fields['latitude'] = loc['latitude']
+        extra_fields['longitude'] = loc['longitude']
+
         if not email:
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
@@ -142,9 +152,11 @@ class CustomUser(AbstractUser, PermissionsMixin):
     avatar_url = models.URLField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+    ip_address = models.CharField(max_length=100, blank=True, null=True)
     latitude = models.CharField(max_length=100, blank=True, null=True)
     longitude = models.CharField(max_length=100, blank=True, null=True)
-    location = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=200, blank=True, null=True)
     first_name = models.CharField(max_length=200, blank=True, null=True)
     gender = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)

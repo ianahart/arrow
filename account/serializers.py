@@ -8,8 +8,9 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ('logged_in', 'avatar_url',
                   'latitude', 'longitude',
-                  'created_at', 'location',
+                  'created_at', 'city',
                   'first_name', 'gender',
                   'last_name', 'email',
+                  'state',
                   'id',
                   )

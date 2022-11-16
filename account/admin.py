@@ -34,7 +34,13 @@ class CustomUserAdmin(BaseUserAdmin):
                     'groups',
                     'user_permissions',
                     'password',
+                    'city',
+                    'state',
+                    'ip_address',
+                    'latitude',
+                    'longitude',
                 )
+
             },
         ),
     )
