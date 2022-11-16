@@ -4,6 +4,7 @@ import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../auth.service';
 import {userState} from '../data';
 import {IUser} from '../interfaces';
+
 @Component({
     selector: 'app-auth-nav-bar',
     templateUrl: './auth-nav-bar.component.html',
@@ -33,11 +34,7 @@ export class AuthNavBarComponent implements OnInit {
             this.authService.setTokens(null)
             this.authService.setUser(userState)
             this.router.navigate(['/'])
-
-
         })
-
-
     }
 }
 

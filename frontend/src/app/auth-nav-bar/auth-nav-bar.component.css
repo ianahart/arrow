@@ -36,7 +36,6 @@ button {
 
 .menu-tab {
     background-color: var(--teal);
-    min-height: 40px;
     width: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
