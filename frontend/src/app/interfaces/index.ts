@@ -42,7 +42,8 @@ export interface IUser {
     last_name: string;
     latitude: string;
     longitude: string;
-    location: string;
+    city: string;
+    state: string;
     logged_in: boolean;
 }
 

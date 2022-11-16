@@ -8,7 +8,8 @@ export const userState = {
     last_name: '',
     latitude: '',
     longitude: '',
-    location: '',
+    state: '',
+    city: '',
     logged_in: false,
 }
 
