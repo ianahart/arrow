@@ -5,6 +5,7 @@ import {AuthService} from '../auth.service';
 import {userState} from '../data';
 import {IUser} from '../interfaces';
 
+
 @Component({
     selector: 'app-auth-nav-bar',
     templateUrl: './auth-nav-bar.component.html',
