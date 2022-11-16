@@ -54,5 +54,11 @@ button {
     border-top-right-radius: 8px;
 }
 
+.menu-content a {
+    text-decoration: none;
+    color:  var(--gray);
+    font-size: 0.9rem;
+}
+
 
 

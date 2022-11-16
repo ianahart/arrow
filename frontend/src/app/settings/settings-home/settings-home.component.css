@@ -1,0 +1,25 @@
+.container {
+    min-height: 100vh;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.navbar a {
+    margin: 1rem;
+    text-decoration: none;
+    color: var(--gray);
+}
+
+.active-link {
+    font-weight: bold;
+}
+
+hr {
+     height: 1px;
+     background-color: #ccc;
+     border: none;
+}
