@@ -6,6 +6,7 @@ import { SettingsHomeComponent } from './settings-home/settings-home.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { FiltersComponent } from './filters/filters.component';
 import { ProfileComponent } from './profile/profile.component';
+import { InterestComponent } from './interest/interest.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ProfileComponent } from './profile/profile.component';
     SettingsHomeComponent,
     PreferencesComponent,
     FiltersComponent,
-    ProfileComponent
+    ProfileComponent,
+    InterestComponent
   ],
   imports: [
     CommonModule,
