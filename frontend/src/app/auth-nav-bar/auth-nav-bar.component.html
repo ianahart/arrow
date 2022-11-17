@@ -1,17 +1,23 @@
 <nav>
-    <button (click)="onLogout()">Logout</button>
-    <div (click)="setMenuOpen(true)" id="menuTrigger" class="user-icon-container">
-        <fa-icon class="user-icon" [icon]="faCircleUser"></fa-icon>
-        <app-click-away-menu [top]="50" [right]="0" (menuOpenEvent)="setMenuOpen(false)" [menuOpen]="menuOpen"
-            [minHeight]="350" [width]="180">
-            <div class="menu-container">
-                <div class="menu-tab">
-                    <p>{{ user.first_name + ' ' + user.last_name| titlecase }}</p>
+    <a class="logo" routerLink="./arrow">
+        <img src="assets/logo.png" />
+    </a>
+    <div class="main-auth-menu">
+        <button (click)="onLogout()">Logout</button>
+        <div (click)="setMenuOpen(true)" id="menuTrigger" class="user-icon-container">
+            <fa-icon class="user-icon" [icon]="faCircleUser"></fa-icon>
+            <app-click-away-menu [top]="50" [right]="0" (menuOpenEvent)="setMenuOpen(false)" [menuOpen]="menuOpen"
+                [minHeight]="350" [width]="180">
+                <div class="menu-container">
+                    <div class="menu-tab">
+                        <p>{{ user.first_name + ' ' + user.last_name| titlecase }}</p>
+                    </div>
+                    <div class="menu-content">
+                        <a (click)="onLinkClickClose($event)" routerLink="./settings">Settings</a>
+                    </div>
                 </div>
-                <div class="menu-content">
-                    <a (click)="onLinkClickClose($event)" routerLink="./settings">Settings</a>
-                </div>
-            </div>
-        </app-click-away-menu>
+            </app-click-away-menu>
+        </div>
+
     </div>
 </nav>
