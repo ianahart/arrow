@@ -1,5 +1,29 @@
 import {AbstractControl} from "@angular/forms";
 
+
+export interface ISelectedInterest {
+    interest: IInterest;
+    selected: boolean;
+}
+
+
+export interface IInterest {
+    id: number;
+    value: string;
+    selected: boolean;
+    name: string;
+    type: string;
+}
+
+export interface ICreativityInterest {
+    id: number;
+    value: string;
+    selected: boolean;
+    name: string;
+    type: string;
+}
+
+
 export interface IForgotPasswordForm {
     email: string | null;
 }

@@ -1,11 +1,57 @@
 <div class="container">
     <h3>My Interests</h3>
     <p>Get specific about the things you love</p>
-    <div (click)="openModal()" class="interests"></div>
+    <div class="border">
+        <div class="interests">
+            <ng-container *ngFor="let interest of interests">
+                <div (click)="selectInterest(interest, false, 'creativity')" *ngIf="interest.selected" class="single">
+                    <p class="emoji">{{ interest.value }}</p>
+                    <p class="name">{{ interest.name }}</p>
+                </div>
+            </ng-container>
+        </div>
+        <p (click)="openModal()" class="modal-trigger">Check out interests</p>
+
+    </div>
     <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen">
         <div class="interest-container">
             <p>Choose up to 5 interests for your profile</p>
-            <h4>Creativity</h4>
+            <div class="interest-inner-container">
+                <h4>Creativity</h4>
+                <div class="single-container">
+                    <ng-container *ngFor="let interest of interests">
+                        <div (click)="selectInterest(interest, true, 'creativity')" class="single"
+                            *ngIf="!interest.selected && interest.type === 'creativity'">
+                            <p class="emoji">{{ interest.value }}</p>
+                            <p class="name">{{ interest.name }}</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="interest-inner-container">
+                <h4>Sports</h4>
+                <div class="single-container">
+                    <ng-container *ngFor="let interest of interests">
+                        <div (click)="selectInterest(interest, true, 'sports')" class="single"
+                            *ngIf="!interest.selected && interest.type === 'sports'">
+                            <p class="emoji">{{ interest.value }}</p>
+                            <p class="name">{{ interest.name }}</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="interest-inner-container">
+                <h4>Pets</h4>
+                <div class="single-container">
+                    <ng-container *ngFor="let interest of interests">
+                        <div (click)="selectInterest(interest, true, 'pets')" class="single"
+                            *ngIf="!interest.selected && interest.type === 'pets'">
+                            <p class="emoji">{{ interest.value }}</p>
+                            <p class="name">{{ interest.name }}</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
         </div>
     </app-modal>
 </div>
