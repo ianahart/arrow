@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {faClose} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-interest',
-  templateUrl: './interest.component.html',
-  styleUrls: ['./interest.component.css']
+    selector: 'app-interest',
+    templateUrl: './interest.component.html',
+    styleUrls: ['./interest.component.css']
 })
 export class InterestComponent implements OnInit {
 
-  constructor() { }
+    faClose = faClose;
+    modalOpen = false;
+    constructor() {}
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
+
+    openModal() {
+        this.modalOpen = true;
+    }
+
+    closeModal() {
+        this.modalOpen = false;
+    }
 }

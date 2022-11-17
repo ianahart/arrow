@@ -1,1 +1,11 @@
-<p>interest works!</p>
+<div class="container">
+    <h3>My Interests</h3>
+    <p>Get specific about the things you love</p>
+    <div (click)="openModal()" class="interests"></div>
+    <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen">
+        <div class="interest-container">
+            <p>Choose up to 5 interests for your profile</p>
+            <h4>Creativity</h4>
+        </div>
+    </app-modal>
+</div>

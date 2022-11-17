@@ -1,10 +1,11 @@
 .container {
     min-height: 100vh;
+    position: relative;
 }
 
 
 .navbar {
-    margin-top: 2.5rem;
+    padding-top: 2.5rem;
     display: flex;
     justify-content: flex-start;
 }
