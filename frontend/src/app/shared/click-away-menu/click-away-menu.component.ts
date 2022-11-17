@@ -23,10 +23,10 @@ export class ClickAwayMenuComponent implements OnInit {
 
     }
     @HostListener('document:click', ['$event.target'])
-    public onPageClick(targetElement: Event) {
+    public onPageClick() {
         event?.stopPropagation()
         const trigger = (event?.target as HTMLElement).id
-        const clickedInside = this.elementRef.nativeElement.contains(targetElement.target) || trigger === 'menuTrigger';
+        const clickedInside = this.elementRef.nativeElement.contains(event?.target) || trigger === 'menuTrigger';
         if (!clickedInside) {
             this.menuOpenEvent.emit(false);
         }

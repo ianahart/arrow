@@ -9,7 +9,7 @@
                     <p>{{ user.first_name + ' ' + user.last_name| titlecase }}</p>
                 </div>
                 <div class="menu-content">
-                    <a routerLink="./settings">Settings</a>
+                    <a (click)="onLinkClickClose($event)" routerLink="./settings">Settings</a>
                 </div>
             </div>
         </app-click-away-menu>

@@ -29,6 +29,11 @@ export class AuthNavBarComponent implements OnInit {
         this.menuOpen = open;
     }
 
+    onLinkClickClose(event: Event) {
+        event?.stopPropagation()
+        this.menuOpen = false;
+    }
+
 
     onLogout() {
         this.authService.logout().subscribe(() => {
