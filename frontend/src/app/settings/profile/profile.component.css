@@ -1,0 +1,22 @@
+.container {
+    border:  1px solid #ccc;
+    width: 850px;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin: 3rem 0.5rem 1.5rem 0.5rem;
+}
+
+
+@media (min-width:605px) and (max-width: 900px) {
+    .container{
+        width: 90%;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+}
