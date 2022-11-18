@@ -1,1 +1,14 @@
-<p>prompts works!</p>
+<div class="container">
+    <h3>Profile Prompts</h3>
+    <p>Make your personality stand out from the crowd</p>
+    <div class="border">
+        <div class="my-prompts"></div>
+        <div class="add-question">
+            <button (click)="openModal($event)">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Add Question
+            </button>
+        </div>
+    </div>
+    <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen"></app-modal>
+</div>
