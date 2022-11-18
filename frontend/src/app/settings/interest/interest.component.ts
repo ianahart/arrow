@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {faClose} from '@fortawesome/free-solid-svg-icons';
 import {IFormObj, IProfileFormData} from 'src/app/interfaces';
-import {interestsState} from 'src/app/data/interests';
+import {interestsState} from 'src/app/data/profile';
 
 @Component({
     selector: 'app-interest',

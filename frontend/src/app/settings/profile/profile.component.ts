@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IProfileFormData, IFormObj} from 'src/app/interfaces';
-import {interestsState} from 'src/app/data/interests';
+import {interestsState} from 'src/app/data/profile';
 
 @Component({
     selector: 'app-profile',
