@@ -12,7 +12,8 @@ import {IInterest} from 'src/app/interfaces';
 export class InterestComponent implements OnInit {
 
     @Output() selectedCreativityInterestEvent = new EventEmitter<ISelectedInterest>()
-    @Input() interests: IInterest[] = interestsState
+    @Input() interests: IInterest[] = interestsState;
+    @Input() selectedCount = 0;
 
     faClose = faClose;
     modalOpen = false;

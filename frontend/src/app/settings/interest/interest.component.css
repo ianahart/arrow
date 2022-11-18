@@ -8,6 +8,11 @@ p {
     color: #b4b2b2;
 }
 
+.selected-count {
+    display: flex;
+    justify-content: center;
+}
+
 
 .modal-trigger {
     font-size: 0.85rem;

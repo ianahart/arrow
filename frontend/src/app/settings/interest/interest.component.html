@@ -16,6 +16,9 @@
     <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen">
         <div class="interest-container">
             <p>Choose up to 5 interests for your profile</p>
+            <div class="selected-count">
+                <p>{{ selectedCount }}/5</p>
+            </div>
             <div class="interest-inner-container">
                 <h4>Creativity</h4>
                 <div class="single-container">

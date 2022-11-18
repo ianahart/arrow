@@ -1,6 +1,7 @@
 <div class="container">
     <form>
-        <app-interest (selectedCreativityInterestEvent)="selectCreativityInterest($event)">
+        <app-interest [selectedCount]="selectedCount"
+            (selectedCreativityInterestEvent)="selectCreativityInterest($event)">
         </app-interest>
         <div class="btn-container">
             <button class="primary-btn">Update</button>
