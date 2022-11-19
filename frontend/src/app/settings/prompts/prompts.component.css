@@ -10,7 +10,7 @@ p {
 .border {
     border: 1px solid #ccc;
     min-height: 60px;
-    width: 300px;
+    width: 400px;
     border-radius: 8px;
     word-break: break-all;
     margin: 1.5rem 0;
@@ -24,7 +24,7 @@ p {
 }
 
 .add-question button {
-    color: #b4b2b2;
+    color: var(--gray);
     border: none;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -35,3 +35,28 @@ p {
 }
 
 
+.prompts {
+    padding: 0.5rem;
+}
+
+.my-prompt {
+    background: #f8f7f7;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    word-break: break-all;
+    cursor: pointer;
+    margin: 1rem auto 1rem auto;
+}
+
+.my-prompt p {
+    margin: 0.25rem 0;
+    padding: 0.15rem;
+}
+
+
+@media(max-width: 600px) {
+    .border  {
+        width: 95%;
+    }
+}

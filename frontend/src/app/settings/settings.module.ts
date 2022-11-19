@@ -10,6 +10,7 @@ import {InterestComponent} from './interest/interest.component';
 import {ModalComponent} from './modal/modal.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PromptsComponent } from './prompts/prompts.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PromptsComponent } from './prompts/prompts.component';
         ProfileComponent,
         InterestComponent,
         ModalComponent,
-        PromptsComponent
+        PromptsComponent,
+        PromptComponent
     ],
     imports: [
         CommonModule,

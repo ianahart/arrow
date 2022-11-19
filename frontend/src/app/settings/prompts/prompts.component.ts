@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {promptsState} from 'src/app/data/profile';
+import {IFormObj, IProfileFormData} from 'src/app/interfaces';
 @Component({
     selector: 'app-prompts',
     templateUrl: './prompts.component.html',
@@ -7,6 +9,9 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 })
 export class PromptsComponent implements OnInit {
 
+    @Input() prompts: IProfileFormData[] = promptsState;
+    @Output() answerEvent = new EventEmitter<IFormObj>();
+    @Output() removeAnswerEvent = new EventEmitter<number>()
 
     faPlus = faPlus
     modalOpen = false;
@@ -16,6 +21,12 @@ export class PromptsComponent implements OnInit {
     ngOnInit(): void {
     }
 
+
+
+    onRemoveAnswer(id: number) {
+        this.removeAnswerEvent.emit(id);
+    }
+
     openModal(event: Event) {
         event.preventDefault();
         this.modalOpen = true;
@@ -23,5 +34,10 @@ export class PromptsComponent implements OnInit {
 
     closeModal() {
         this.modalOpen = false;
+    }
+
+
+    onAnswer(answer: IFormObj) {
+        this.answerEvent.emit(answer)
     }
 }

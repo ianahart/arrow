@@ -2,7 +2,14 @@
     <h3>Profile Prompts</h3>
     <p>Make your personality stand out from the crowd</p>
     <div class="border">
-        <div class="my-prompts"></div>
+        <div class="my-prompts">
+            <ng-container *ngFor="let prompt of prompts">
+                <div (click)="onRemoveAnswer(prompt.id)" class="my-prompt" *ngIf="prompt.selected">
+                    <p>{{ prompt.name }}</p>
+                    <p>{{ prompt.value }}</p>
+                </div>
+            </ng-container>
+        </div>
         <div class="add-question">
             <button (click)="openModal($event)">
                 <fa-icon [icon]="faPlus"></fa-icon>
@@ -10,5 +17,12 @@
             </button>
         </div>
     </div>
-    <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen"></app-modal>
+    <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen">
+
+        <div class="prompts">
+            <ng-container *ngFor="let prompt of prompts">
+                <app-prompt (answerEvent)="onAnswer($event)" *ngIf="!prompt.selected" [prompt]="prompt"></app-prompt>
+            </ng-container>
+        </div>
+    </app-modal>
 </div>

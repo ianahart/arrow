@@ -1,10 +1,10 @@
 import {AbstractControl} from "@angular/forms";
 
 
-
 export interface IFormObj {
     selected: boolean;
     obj: IProfileFormData
+    answer?: string;
 
 }
 

@@ -1,1 +1,10 @@
-<p>prompt works!</p>
+<div (click)="setEditOpen()" class="single">
+    <p class="name">{{ prompt.name }}</p>
+    <div *ngIf="editOpen" class="edit-box">
+        <div class="row">
+            <input #answerInput (input)="onInputChange(answerInput.value)" placeholder="Answer" type="text" />
+            <button (click)="onSave($event)" class="save-btn">Save</button>
+            <button class="cancel-btn" (click)="setEditClose($event)">Cancel</button>
+        </div>
+    </div>
+</div>
