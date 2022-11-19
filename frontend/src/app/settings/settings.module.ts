@@ -9,6 +9,8 @@ import {ProfileComponent} from './profile/profile.component';
 import {InterestComponent} from './interest/interest.component';
 import {ModalComponent} from './modal/modal.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { PromptsComponent } from './prompts/prompts.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         FiltersComponent,
         ProfileComponent,
         InterestComponent,
-        ModalComponent
+        ModalComponent,
+        PromptsComponent,
+        PromptComponent
     ],
     imports: [
         CommonModule,

@@ -29,3 +29,16 @@ export const interestsState = [
     {id: 29, value: '🐍', name: 'Snakes', selected: false, type: 'pets'},
     {id: 30, value: '🐢', name: 'Turtles', selected: false, type: 'pets'},
 ]
+
+export const promptsState = [
+    {id: 1, value: '', name: 'I quote too much from...', selected: false, type: 'prompts'},
+    {id: 2, value: '', name: 'I get way to excited about...', selected: false, type: 'prompts'},
+    {id: 3, value: '', name: 'The quickest way to my heart is...', selected: false, type: 'prompts'},
+    {id: 4, value: '', name: 'Swipe right if...', selected: false, type: 'prompts'},
+    {id: 5, value: '', name: 'I promise I won\'t judge you if...', selected: false, type: 'prompts'},
+    {id: 6, value: '', name: 'I\'m hoping you...', selected: false, type: 'prompts'},
+    {id: 7, value: '', name: 'My real-life superpower is...', selected: false, type: 'prompts'},
+    {id: 8, value: '', name: 'Perfect first date...', selected: false, type: 'prompts'},
+    {id: 9, value: '', name: 'As a child, I was really into...', selected: false, type: 'prompts'},
+    {id: 10, value: '', name: 'I guarantee you that...', selected: false, type: 'prompts'},
+]

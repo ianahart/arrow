@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {faClose} from '@fortawesome/free-solid-svg-icons';
-import {ISelectedInterest} from 'src/app/interfaces';
-import {interestsState} from 'src/app/data/interests';
-import {IInterest} from 'src/app/interfaces';
+import {IFormObj, IProfileFormData} from 'src/app/interfaces';
+import {interestsState} from 'src/app/data/profile';
 
 @Component({
     selector: 'app-interest',
@@ -11,8 +10,8 @@ import {IInterest} from 'src/app/interfaces';
 })
 export class InterestComponent implements OnInit {
 
-    @Output() selectedCreativityInterestEvent = new EventEmitter<ISelectedInterest>()
-    @Input() interests: IInterest[] = interestsState;
+    @Output() selectedCreativityInterestEvent = new EventEmitter<IFormObj>()
+    @Input() interests: IProfileFormData[] = interestsState;
     @Input() selectedCount = 0;
 
     faClose = faClose;
@@ -31,8 +30,8 @@ export class InterestComponent implements OnInit {
         this.modalOpen = false;
     }
 
-    selectInterest(interest: IInterest, selected: boolean, type: string) {
-        const selectedInterest = {interest, selected}
+    selectInterest(interest: IProfileFormData, selected: boolean, type: string) {
+        const selectedInterest = {obj: interest, selected}
         switch (type) {
             case 'creativity':
                 this.selectedCreativityInterestEvent.emit(selectedInterest)

@@ -1,19 +1,22 @@
 import {AbstractControl} from "@angular/forms";
 
 
-export interface ISelectedInterest {
-    interest: IInterest;
+export interface IFormObj {
     selected: boolean;
+    obj: IProfileFormData
+    answer?: string;
+
 }
 
-
-export interface IInterest {
+export interface IProfileFormData {
     id: number;
     value: string;
     selected: boolean;
     name: string;
     type: string;
+
 }
+
 
 export interface ICreativityInterest {
     id: number;

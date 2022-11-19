@@ -1,0 +1,62 @@
+h3 {
+    color: var(--gray);
+}
+
+p {
+    color: #b4b2b2;
+}
+
+
+.border {
+    border: 1px solid #ccc;
+    min-height: 60px;
+    width: 400px;
+    border-radius: 8px;
+    word-break: break-all;
+    margin: 1.5rem 0;
+}
+
+
+.add-question {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
+.add-question button {
+    color: var(--gray);
+    border: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 150px;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.25rem 0.1rem;
+}
+
+
+.prompts {
+    padding: 0.5rem;
+}
+
+.my-prompt {
+    background: #f8f7f7;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    word-break: break-all;
+    cursor: pointer;
+    margin: 1rem auto 1rem auto;
+}
+
+.my-prompt p {
+    margin: 0.25rem 0;
+    padding: 0.15rem;
+}
+
+
+@media(max-width: 600px) {
+    .border  {
+        width: 95%;
+    }
+}

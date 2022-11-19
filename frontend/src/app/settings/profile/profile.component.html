@@ -3,6 +3,8 @@
         <app-interest [selectedCount]="selectedCount"
             (selectedCreativityInterestEvent)="selectCreativityInterest($event)">
         </app-interest>
+        <app-prompts (removeAnswerEvent)="deselectPrompt($event)" (answerEvent)="selectPrompt($event)"
+            [prompts]="prompts"></app-prompts>
         <div class="btn-container">
             <button class="primary-btn">Update</button>
         </div>
