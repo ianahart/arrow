@@ -1,5 +1,6 @@
 .container {
     border:  1px solid #ccc;
+    min-height: 100vh;
     width: 850px;
     border-radius: 8px;
     padding: 0.5rem;
