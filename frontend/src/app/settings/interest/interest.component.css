@@ -66,6 +66,23 @@ p {
     cursor: pointer;
 }
 
+.default-interest {
+    display: flex;
+    margin: 0.25rem;
+    align-items: center;
+    background: #fbf8f8;
+    border-radius: 20px;
+    padding: 0.25rem;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.default-interest p {
+    margin:  0;
+}
+
+
+
 
 .name {
     font-size: 0.85rem;

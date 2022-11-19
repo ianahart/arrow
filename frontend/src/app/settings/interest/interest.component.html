@@ -10,6 +10,14 @@
                 </div>
             </ng-container>
         </div>
+        <div class="interests">
+            <ng-container *ngIf="selectedCount === 0">
+                <div class="default-interest" *ngFor="let interest  of interests.slice(0,3)">
+                    <p>{{ interest.value }}</p>
+                    <p>{{ interest.name }}</p>
+                </div>
+            </ng-container>
+        </div>
         <p (click)="openModal()" class="modal-trigger">Check out interests</p>
 
     </div>
