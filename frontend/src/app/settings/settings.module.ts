@@ -13,6 +13,7 @@ import {PromptsComponent} from './prompts/prompts.component';
 import {PromptComponent} from './prompt/prompt.component';
 import {BioComponent} from './bio/bio.component';
 import {BasicsComponent} from './basics/basics.component';
+import { UploaderComponent } from './uploader/uploader.component';
 @NgModule({
     declarations: [
         SettingsHomeComponent,
@@ -25,6 +26,7 @@ import {BasicsComponent} from './basics/basics.component';
         PromptComponent,
         BioComponent,
         BasicsComponent,
+        UploaderComponent,
     ],
     imports: [
         CommonModule,
