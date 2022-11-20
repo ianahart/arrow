@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="bio-heading">
+        <h3>My Bio</h3>
+        <p>Write a fun and punchy intro</p>
+    </div>
+    <p class="char-counter">{{ bio.length }}/150</p>
+    <textarea maxlength="150" #bioText (input)="onInputChange(bioText.value)" placeholder="Bio"></textarea>
+</div>
