@@ -18,6 +18,21 @@ logger = logging.getLogger('django')
 # pyright: reportGeneralTypeIssues=false
 
 
+class UserImageManager(models.Manager):
+    def create(self):
+        pass
+
+
+class UserImage(models.Model):
+    user = models.ForeignKey(
+        'account.CustomUser',
+        on_delete=models.CASCADE,
+        related_name='user_images'
+    )
+    filename: models.TextField(max_length=300,  blank=True,  null=True)
+    file_url:  models.TextField(max_length=350, blank=True, null=True)
+
+
 class CustomUserManager(BaseUserManager):
 
     def send_forgot_email(self, id: int, data):
