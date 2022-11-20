@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
 
     interests: IProfileFormData[] = interestsState;
     prompts: IProfileFormData[] = promptsState;
+    bio = '';
     selectedCount = 0;
     constructor() {}
 
@@ -64,5 +65,9 @@ export class ProfileComponent implements OnInit {
             }
             return prompt
         })
+    }
+
+    setBio(value: string) {
+        this.bio = value;
     }
 }

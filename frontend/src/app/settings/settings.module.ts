@@ -11,6 +11,7 @@ import {ModalComponent} from './modal/modal.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PromptsComponent } from './prompts/prompts.component';
 import { PromptComponent } from './prompt/prompt.component';
+import { BioComponent } from './bio/bio.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PromptComponent } from './prompt/prompt.component';
         InterestComponent,
         ModalComponent,
         PromptsComponent,
-        PromptComponent
+        PromptComponent,
+        BioComponent
     ],
     imports: [
         CommonModule,
