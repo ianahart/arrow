@@ -9,12 +9,10 @@ import {ProfileComponent} from './profile/profile.component';
 import {InterestComponent} from './interest/interest.component';
 import {ModalComponent} from './modal/modal.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { PromptsComponent } from './prompts/prompts.component';
-import { PromptComponent } from './prompt/prompt.component';
-import { BioComponent } from './bio/bio.component';
-import { BasicsComponent } from './basics/basics.component';
-
-
+import {PromptsComponent} from './prompts/prompts.component';
+import {PromptComponent} from './prompt/prompt.component';
+import {BioComponent} from './bio/bio.component';
+import {BasicsComponent} from './basics/basics.component';
 @NgModule({
     declarations: [
         SettingsHomeComponent,
@@ -26,7 +24,7 @@ import { BasicsComponent } from './basics/basics.component';
         PromptsComponent,
         PromptComponent,
         BioComponent,
-        BasicsComponent
+        BasicsComponent,
     ],
     imports: [
         CommonModule,

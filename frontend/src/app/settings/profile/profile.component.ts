@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IProfileFormData, IFormObj} from 'src/app/interfaces';
-import {interestsState, promptsState} from 'src/app/data/profile';
+import {basicsState, interestsState, promptsState} from 'src/app/data/profile';
 
 @Component({
     selector: 'app-profile',
@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
 
     interests: IProfileFormData[] = interestsState;
     prompts: IProfileFormData[] = promptsState;
+    basics: IProfileFormData[] = basicsState;
     bio = '';
     selectedCount = 0;
     constructor() {}
@@ -53,7 +54,6 @@ export class ProfileComponent implements OnInit {
     }
 
     selectPrompt(answer: IFormObj) {
-        console.log(answer)
         this.updateSelected(this.prompts, answer)
     }
 
@@ -70,4 +70,43 @@ export class ProfileComponent implements OnInit {
     setBio(value: string) {
         this.bio = value;
     }
+
+
+    saveBasic({id, value}: {id: number, value: string}) {
+        this.basics = this.basics.map((basic) => {
+            basic.value = id === basic.id ? value : basic.value;
+            return basic
+        })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

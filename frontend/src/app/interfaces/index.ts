@@ -1,4 +1,5 @@
 import {AbstractControl} from "@angular/forms";
+import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 
 export interface IFormObj {
@@ -14,6 +15,7 @@ export interface IProfileFormData {
     selected: boolean;
     name: string;
     type: string;
+    icon?: IconDefinition;
 
 }
 

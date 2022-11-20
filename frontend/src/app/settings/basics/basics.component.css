@@ -1,0 +1,80 @@
+h3 {
+    color: var(--gray);
+}
+
+.container {
+    margin: 1.5rem 0;
+}
+
+
+fa-icon  {
+    color: var(--gray);
+}
+
+.basic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:  1rem  0;
+    width: 300px;
+
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.text  {
+    margin: 0 1rem;
+    color: var(--gray);
+}
+
+.icon-container {
+    cursor: pointer;
+}
+
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.5rem;
+    margin-top: 3rem;
+}
+
+
+.btn-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-left: 1.5rem;
+}
+
+
+input {
+    border-radius: 8px;
+    height: 35px;
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+button {
+    border: none;
+    transition: all 0.25s ease-out;
+    opacity: 0.8;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    width: 100px;
+}
+
+button:first-of-type {
+    background: var(--purple);
+    color: #fff;
+}
+
+
+

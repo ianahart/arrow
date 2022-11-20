@@ -1,1 +1,24 @@
-<p>basics works!</p>
+<div class="container">
+    <h3>My Basics</h3>
+    <div *ngFor="let basic of basics" class="basic">
+        <div class="row">
+            <fa-icon [icon]="basic.icon"></fa-icon>
+            <p class="text">{{ basic.name }}</p>
+            <p class="text">{{ basic.value }}</p>
+        </div>
+
+        <div (click)="openModal(basic.id,  basic.name)" class="icon-container">
+            <fa-icon [icon]="faChevronRight"></fa-icon>
+        </div>
+    </div>
+    <app-modal (modalEvent)="closeModal()" *ngIf="modalOpen">
+        <div class="form">
+            <input #basicValue (input)="onInputChange(basicValue.value)" [placeholder]="selectedBasic.name" />
+            <div class="btn-container">
+                <button (click)="onSaveBasic($event)">Save</button>
+                <button (click)="cancelBasic($event)">Cancel</button>
+            </div>
+        </div>
+    </app-modal>
+
+</div>

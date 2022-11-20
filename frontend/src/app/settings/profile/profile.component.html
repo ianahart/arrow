@@ -6,6 +6,7 @@
         <app-prompts (removeAnswerEvent)="deselectPrompt($event)" (answerEvent)="selectPrompt($event)"
             [prompts]="prompts"></app-prompts>
         <app-bio [bio]="bio" (bioTextEvent)="setBio($event)"></app-bio>
+        <app-basics (saveBasicEvent)="saveBasic($event)" [basics]="basics"></app-basics>
         <div class="btn-container">
             <button class="primary-btn">Update</button>
         </div>
