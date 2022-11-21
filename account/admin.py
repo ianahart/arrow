@@ -39,7 +39,12 @@ class CustomUserAdmin(BaseUserAdmin):
                     'ip_address',
                     'latitude',
                     'longitude',
+                    'interests',
+                    'basics',
+                    'prompts',
+                    'bio',
                 )
+
 
             },
         ),

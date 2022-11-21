@@ -11,6 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from django.core.mail import EmailMessage
 from core import settings
+from service.file_upload import FileUpload
 from service.geolocation import geoloc
 import logging
 logger = logging.getLogger('django')
@@ -19,21 +20,43 @@ logger = logging.getLogger('django')
 
 
 class UserImageManager(models.Manager):
-    def create(self):
-        pass
+    def create(self, photo, user):
+        print(photo, type(photo))
+        file_upload = FileUpload(photo, 'photos')
+        photo_url, photo_filename = file_upload.upload()
+
+        image = self.model(
+            user=user,
+            filename=photo_filename,
+            file_url=photo_url,
+        )
+
+        image.save()
 
 
 class UserImage(models.Model):
+
+    objects: UserImageManager = UserImageManager()
+
     user = models.ForeignKey(
         'account.CustomUser',
         on_delete=models.CASCADE,
         related_name='user_images'
     )
-    filename: models.TextField(max_length=300,  blank=True,  null=True)
-    file_url:  models.TextField(max_length=350, blank=True, null=True)
+    filename = models.TextField(max_length=300,  blank=True,  null=True)
+    file_url = models.TextField(max_length=350, blank=True, null=True)
 
 
 class CustomUserManager(BaseUserManager):
+
+    def update_profile(self, data,  pk: int):
+        user = CustomUser.objects.get(pk=pk)
+        user.interests = data['interests']
+        user.basics = data['basics']
+        user.prompts = data['prompts']
+        user.bio = data['bio']
+
+        user.save()
 
     def send_forgot_email(self, id: int, data):
 

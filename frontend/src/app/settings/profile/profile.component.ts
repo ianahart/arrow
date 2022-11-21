@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {IProfileFormData, IFormObj, IFile} from 'src/app/interfaces';
 import {basicsState, filesState, interestsState, promptsState} from 'src/app/data/profile';
+import {AuthService} from 'src/app/auth.service';
+import {ProfileService} from 'src/app/profile.service';
 
 @Component({
     selector: 'app-profile',
@@ -14,12 +17,16 @@ export class ProfileComponent implements OnInit {
     prompts: IProfileFormData[] = promptsState;
     basics: IProfileFormData[] = basicsState;
     files: IFile[] = filesState;
+    userId: null | number = null
+    errors: string[] = []
     bio = '';
     selectedCount = 0;
-    constructor() {
+
+    constructor(private router: Router, private authService: AuthService, private profileService: ProfileService) {
     }
 
     ngOnInit(): void {
+        this.userId = this.authService.getUser().id;
     }
 
 
@@ -91,34 +98,37 @@ export class ProfileComponent implements OnInit {
         })
     }
 
+    private appendPhoto(formData: any, key: string, photo: File | null) {
+        if (photo !== null) {
+            formData.append(key, photo)
+        }
+    }
+
+    onSubmit(e: Event) {
+        e.preventDefault()
+        this.errors = []
+        const formData = new FormData()
+        const [photoOne, photoTwo, photoThree] = this.files.map((file) => file.value)
+        formData.append('interests', JSON.stringify(this.interests));
+        formData.append('basics', JSON.stringify(this.basics));
+        formData.append('prompts', JSON.stringify(this.prompts));
+        formData.append('bio', this.bio);
 
 
+        this.appendPhoto(formData, 'photo_one', photoOne)
+        this.appendPhoto(formData, 'photo_two', photoTwo)
+        this.appendPhoto(formData, 'photo_three', photoThree)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (!this.userId) return;
+        this.profileService.updateProfile(this.userId, formData).subscribe((response) => {
+            this.router.navigate(['/arrow'])
+        }, (err) => {
+            console.log(err)
+            for (const [_, error] of Object.entries(err.error)) {
+                console.log(error)
+                this.errors.push(error as string)
+            }
+        })
+    }
 }

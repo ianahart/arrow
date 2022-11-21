@@ -3,6 +3,36 @@ from rest_framework import serializers
 from account.models import CustomUser
 
 
+class UserImageSerializer(serializers.Serializer):
+    photo_one = serializers.ImageField(required=False)
+    photo_two = serializers.ImageField(required=False)
+    photo_three = serializers.ImageField(required=False)
+
+    class Meta:
+        fields = ('photo_one', 'photo_two', 'photo_three', )
+
+    def validate_photo_one(self, photo):
+        if (photo.size > 1500000):
+            raise serializers.ValidationError('Photo must be under 1MB.')
+        return photo
+
+    def validate_photo_two(self, photo):
+        if (photo.size > 1500000):
+            raise serializers.ValidationError('Photo must be under 1MB.')
+        return photo
+
+    def validate_photo_three(self, photo):
+        if (photo.size > 1500000):
+            raise serializers.ValidationError('Photo must be under 1MB.')
+        return photo
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('interests', 'basics', 'bio', 'prompts')
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
