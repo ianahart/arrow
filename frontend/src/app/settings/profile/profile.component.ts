@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {IProfileFormData, IFormObj, IFile} from 'src/app/interfaces';
+import {IProfileFormData, IFormObj, IFile, IGetProfileResponse} from 'src/app/interfaces';
 import {basicsState, filesState, interestsState, promptsState} from 'src/app/data/profile';
 import {AuthService} from 'src/app/auth.service';
 import {ProfileService} from 'src/app/profile.service';
@@ -22,13 +22,44 @@ export class ProfileComponent implements OnInit {
     bio = '';
     selectedCount = 0;
 
-    constructor(private router: Router, private authService: AuthService, private profileService: ProfileService) {
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+        private profileService: ProfileService,
+
+    ) {
     }
 
     ngOnInit(): void {
         this.userId = this.authService.getUser().id;
+
+        this.profileService.getProfile(this.userId).subscribe((response) => {
+
+            this.populateInterests(response)
+            this.populateFiles(response)
+            this.bio = response.profile.bio;
+            this.prompts = response.profile.prompts;
+            this.basics = response.profile.basics;
+            this.selectedCount = this.getInterests().length;
+        })
     }
 
+
+
+    populateInterests(response: IGetProfileResponse) {
+        this.interests = this.interests.map((interest, index) => {
+            interest.selected = response.profile.interests[index].selected;
+            return interest
+        })
+    }
+
+    populateFiles(response: IGetProfileResponse) {
+        this.files = this.files.map((file, index) => {
+            file.src = response.profile.images[index]
+            return file;
+        })
+
+    }
 
     alterFile(resource: {id: number, file: File | null}) {
         this.files = this.files.map((file) => {

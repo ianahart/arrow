@@ -4,5 +4,5 @@
         <p>Write a fun and punchy intro</p>
     </div>
     <p class="char-counter">{{ bio.length }}/150</p>
-    <textarea maxlength="150" #bioText (input)="onInputChange(bioText.value)" placeholder="Bio"></textarea>
+    <textarea maxlength="150" [value]="bio" (input)="onInputChange($event)" placeholder="Bio"></textarea>
 </div>

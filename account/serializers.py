@@ -27,10 +27,18 @@ class UserImageSerializer(serializers.Serializer):
         return photo
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class UserUpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('interests', 'basics', 'bio', 'prompts')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    images = serializers.ListField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('images', 'interests', 'basics', 'bio', 'prompts')
 
 
 class UserSerializer(serializers.ModelSerializer):
