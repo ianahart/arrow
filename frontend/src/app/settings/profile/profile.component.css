@@ -8,6 +8,28 @@
 }
 
 
+.uploaders  {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row-uploaders  {
+    display: flex;
+    flex-direction: column;
+
+}
+
+h3 {
+    color: var(--gray);
+}
+
+.photo-tagline {
+    color: var(--light-gray);
+}
+
+
+
+
 @media (min-width:605px) and (max-width: 900px) {
     .container{
         width: 90%;
@@ -19,5 +41,10 @@
 @media (max-width: 600px) {
     .container {
         width: 95%;
+    }
+
+    .uploaders {
+        flex-direction: column;
+        align-items: center;
     }
 }
