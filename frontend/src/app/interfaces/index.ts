@@ -5,6 +5,7 @@ export interface IFile {
     id: number;
     value: File | null;
     minHeight: string;
+    src: string;
 }
 
 export interface IFormObj {

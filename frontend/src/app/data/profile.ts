@@ -2,9 +2,9 @@ import {faBriefcase, faUserGraduate, faLocationPin, faCity} from "@fortawesome/f
 
 
 export const filesState = [
-    {id: 1, value: null, minHeight: '300'},
-    {id: 2, value: null, minHeight: '120'},
-    {id: 3, value: null, minHeight: '120'},
+    {id: 1, value: null, minHeight: '300', src: ''},
+    {id: 2, value: null, minHeight: '120', src: ''},
+    {id: 3, value: null, minHeight: '120', src: ''},
 ]
 
 export const interestsState = [

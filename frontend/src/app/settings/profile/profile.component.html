@@ -1,7 +1,8 @@
 <div class="container">
-    <form>
+    <form (submit)="onSubmit($event)">
         <h3>My Photos</h3>
         <p class="photo-tagline">Pick some that show the true you</p>
+        <p *ngFor="let error  of  errors" class="error">{{ error }}</p>
         <div class="uploaders">
             <ng-container *ngFor="let file of files">
                 <app-uploader (uploadEvent)="alterFile($event)" [id]="file.id" [value]="file.value"

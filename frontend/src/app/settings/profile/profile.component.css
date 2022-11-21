@@ -7,6 +7,10 @@
     margin: 3rem 0.5rem 1.5rem 0.5rem;
 }
 
+.error {
+    font-size: 0.85rem;
+    color: red;
+}
 
 .uploaders  {
     display: flex;
