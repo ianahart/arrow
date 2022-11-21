@@ -1,6 +1,23 @@
 import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
+
+
+export interface IProfile {
+    images: string[];
+    basics: IProfileFormData[];
+    bio: string;
+    interests: IProfileFormData[];
+    prompts: IProfileFormData[];
+}
+
+export interface IGetProfileResponse {
+    message: string;
+    profile: IProfile;
+
+}
+
+
 export interface IFile {
     id: number;
     value: File | null;

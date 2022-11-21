@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input, SimpleChange, SimpleChanges} from '@angular/core';
 import {faClose} from '@fortawesome/free-solid-svg-icons';
 import {IFormObj, IProfileFormData} from 'src/app/interfaces';
 import {interestsState} from 'src/app/data/profile';
@@ -13,6 +13,9 @@ export class InterestComponent implements OnInit {
     @Output() selectedCreativityInterestEvent = new EventEmitter<IFormObj>()
     @Input() interests: IProfileFormData[] = interestsState;
     @Input() selectedCount = 0;
+    @Input() loaded = false;
+
+
 
     faClose = faClose;
     modalOpen = false;
@@ -29,6 +32,7 @@ export class InterestComponent implements OnInit {
     closeModal() {
         this.modalOpen = false;
     }
+
 
     selectInterest(interest: IProfileFormData, selected: boolean, type: string) {
         const selectedInterest = {obj: interest, selected}

@@ -16,9 +16,9 @@ export class BioComponent implements OnInit {
     }
 
 
-    onInputChange(value: string) {
-
-        this.bioTextEvent.emit(value);
+    onInputChange(event: Event) {
+        const target = event.target as HTMLInputElement;
+        this.bioTextEvent.emit(target.value);
     }
 
 }

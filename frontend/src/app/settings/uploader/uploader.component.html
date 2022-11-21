@@ -7,5 +7,6 @@
     <div (drop)="onDrop($event)" [style.min-height]="minHeight + 'px'" class="container">
         <fa-icon [icon]="faPlus"></fa-icon>
         <input (input)="onInputChange($event)" type="file" multiple />
+        <img *ngIf="src" [src]="src" />
     </div>
 </div>

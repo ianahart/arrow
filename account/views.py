@@ -1,15 +1,16 @@
-from rest_framework.exceptions import ParseError, ValidationError
+from rest_framework.exceptions import NotFound, ParseError, ValidationError
 from django.core.exceptions import BadRequest, ObjectDoesNotExist
 from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import status
+from account.permissions import AccountPermission
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from account.models import CustomUser, UserImage
 import json
 import logging
-from account.serializers import UserImageSerializer, UserProfileSerializer, UserSerializer
+from account.serializers import UserImageSerializer, UserUpdateProfileSerializer, UserProfileSerializer, UserSerializer
 
 from authentication.serializers import LoginSerializer, RegisterSerializer
 
@@ -17,12 +18,37 @@ logger = logging.getLogger('django')
 
 
 class DetailsAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, AccountPermission]
+
+    def get(self,  request, pk: int):
+        try:
+
+            user = CustomUser.objects.get(pk=pk)
+            self.check_object_permissions(request, user)
+
+            result = CustomUser.objects.populate_profile(pk)
+
+            if result['type'] == 'error':
+                raise NotFound(result['data'])
+
+            serializer = UserProfileSerializer(result['data'])
+            return Response({
+                'message': 'success',
+                'profile': serializer.data
+            }, status=status.HTTP_200_OK)
+
+        except NotFound as e:
+            return Response({
+                'message': str(e.detail)
+            }, status=status.HTTP_404_NOT_FOUND)
 
     def patch(self, request, pk: int):
         try:
+            auth_user = CustomUser.objects.get(pk=pk)
 
-            serializer = UserProfileSerializer(data=request.data)
+            self.check_object_permissions(request, auth_user)
+
+            serializer = UserUpdateProfileSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             photos = {
                 key: value for key,
@@ -38,16 +64,17 @@ class DetailsAPIView(APIView):
             )
 
             user = CustomUser.objects.get(pk=pk)
-            for photo in photo_serializer.validated_data.values():  # type:ignore
-                UserImage.objects.create(photo, user)
+            for photo in photo_serializer.validated_data.items():  # type:ignore
+                (spot, value) = photo
+                UserImage.objects.create(value, user, spot)
 
             return Response({
                 'message': 'success',
             }, status=status.HTTP_200_OK)
 
-        except ParseError:
+        except ParseError as e:
             return Response({
-                'error': 'parse error'
+                'error': str(e.detail)
             }, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -11,6 +11,7 @@ export class UploaderComponent implements OnInit {
     @Input() minHeight = '100';
     @Input() id = 0;
     @Input() value = null;
+    @Input() src = '';
     @Output() uploadEvent = new EventEmitter<{id: number, file: File | null}>();
 
     error = '';

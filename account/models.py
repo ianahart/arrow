@@ -20,15 +20,17 @@ logger = logging.getLogger('django')
 
 
 class UserImageManager(models.Manager):
-    def create(self, photo, user):
-        print(photo, type(photo))
+    def create(self, photo, user, spot):
         file_upload = FileUpload(photo, 'photos')
         photo_url, photo_filename = file_upload.upload()
+        image = UserImage.objects.all().filter(user_id=user.id).filter(spot=spot)
 
+        image.delete()
         image = self.model(
             user=user,
             filename=photo_filename,
             file_url=photo_url,
+            spot=spot,
         )
 
         image.save()
@@ -45,9 +47,21 @@ class UserImage(models.Model):
     )
     filename = models.TextField(max_length=300,  blank=True,  null=True)
     file_url = models.TextField(max_length=350, blank=True, null=True)
+    spot = models.CharField(max_length=50, blank=True, null=True)
 
 
 class CustomUserManager(BaseUserManager):
+
+    def populate_profile(self, pk: int):
+        user = CustomUser.objects.all().filter(
+            id=pk).first()
+
+        if user is None:
+            return {'type': 'error', 'data': 'User does not exist.'}
+        user.images = user.user_images.all(
+        )[0:3].values_list('file_url', flat=True)
+
+        return {'type': 'ok', 'data': user}
 
     def update_profile(self, data,  pk: int):
         user = CustomUser.objects.get(pk=pk)
