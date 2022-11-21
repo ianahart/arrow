@@ -175,6 +175,10 @@ class CustomUser(AbstractUser, PermissionsMixin):
     first_name = models.CharField(max_length=200, blank=True, null=True)
     gender = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=200, blank=True, null=True)
+    bio = models.CharField(max_length=150, blank=True, null=True)
+    basics = models.JSONField(blank=True, null=True)
+    prompts = models.JSONField(blank=True, null=True)
+    interests = models.JSONField(blank=True, null=True)
     email = models.EmailField(_(
         'email address'),
         unique=True,
