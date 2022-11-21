@@ -1,6 +1,11 @@
 import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
+export interface IFile {
+    id: number;
+    value: File | null;
+    minHeight: string;
+}
 
 export interface IFormObj {
     selected: boolean;

@@ -1,5 +1,12 @@
 import {faBriefcase, faUserGraduate, faLocationPin, faCity} from "@fortawesome/free-solid-svg-icons"
 
+
+export const filesState = [
+    {id: 1, value: null, minHeight: '300'},
+    {id: 2, value: null, minHeight: '120'},
+    {id: 3, value: null, minHeight: '120'},
+]
+
 export const interestsState = [
     {id: 1, value: '🎨', name: 'Art', selected: false, type: 'creativity'},
     {id: 2, value: '📎', name: 'Crafts', selected: false, type: 'creativity'},

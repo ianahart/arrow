@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {IProfileFormData, IFormObj} from 'src/app/interfaces';
-import {basicsState, interestsState, promptsState} from 'src/app/data/profile';
+import {IProfileFormData, IFormObj, IFile} from 'src/app/interfaces';
+import {basicsState, filesState, interestsState, promptsState} from 'src/app/data/profile';
 
 @Component({
     selector: 'app-profile',
@@ -13,11 +13,24 @@ export class ProfileComponent implements OnInit {
     interests: IProfileFormData[] = interestsState;
     prompts: IProfileFormData[] = promptsState;
     basics: IProfileFormData[] = basicsState;
+    files: IFile[] = filesState;
     bio = '';
     selectedCount = 0;
-    constructor() {}
+    constructor() {
+    }
 
     ngOnInit(): void {
+        console.log('inonit')
+    }
+
+
+    alterFile(resource: {id: number, file: File | null}) {
+        this.files = this.files.map((file) => {
+            if (file.id === resource.id) {
+                file.value = resource.file;
+            }
+            return file;
+        })
     }
 
 

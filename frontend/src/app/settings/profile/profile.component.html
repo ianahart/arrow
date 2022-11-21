@@ -1,5 +1,13 @@
 <div class="container">
     <form>
+        <h3>My Photos</h3>
+        <p class="photo-tagline">Pick some that show the true you</p>
+        <div class="uploaders">
+            <ng-container *ngFor="let file of files">
+                <app-uploader (uploadEvent)="alterFile($event)" [id]="file.id" [value]="file.value"
+                    [minHeight]="file.minHeight"></app-uploader>
+            </ng-container>
+        </div>
         <app-interest [selectedCount]="selectedCount"
             (selectedCreativityInterestEvent)="selectCreativityInterest($event)">
         </app-interest>

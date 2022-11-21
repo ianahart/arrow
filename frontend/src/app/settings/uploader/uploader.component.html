@@ -1,0 +1,11 @@
+<div>
+    <div class="photo-name" *ngIf="value !== null">
+        <p>{{ value.name }}</p>
+        <fa-icon (click)="onRemoveFile(id)" [icon]="faClose"></fa-icon>
+    </div>
+    <p class="error" *ngIf="error.length">{{ error }}</p>
+    <div (drop)="onDrop($event)" [style.min-height]="minHeight + 'px'" class="container">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        <input (input)="onInputChange($event)" type="file" multiple />
+    </div>
+</div>
