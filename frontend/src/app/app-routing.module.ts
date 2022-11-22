@@ -2,17 +2,18 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
 import {ResetPasswordHomeComponent} from './forgot-password/reset-password-home/reset-password-home.component';
+import {GuestGuard} from './guest.guard';
 const routes: Routes = [
     {
         path: '', loadChildren: async () => {
             const dyamicImport = await import('./home/home.module')
             return dyamicImport.HomeModule
-        }
+        }, canActivate: [GuestGuard]
     }, {
         path: 'register', loadChildren: async () => {
             const dyamicImport = await import('./register/register.module')
             return dyamicImport.RegisterModule
-        }
+        }, canActivate: [GuestGuard]
     },
     {
         path: 'arrow', loadChildren: async () => {
