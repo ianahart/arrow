@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'account',
     'authentication',
     'match',
+    'prospect',
 ]
 
 
