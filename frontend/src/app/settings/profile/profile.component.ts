@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {IProfileFormData, IFormObj, IFile, IGetProfileResponse} from 'src/app/interfaces';
 import {basicsState, filesState, interestsState, promptsState} from 'src/app/data/profile';
@@ -10,7 +10,7 @@ import {ProfileService} from 'src/app/profile.service';
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
 
     interests: IProfileFormData[] = interestsState;
@@ -30,6 +30,25 @@ export class ProfileComponent implements OnInit {
     ) {
     }
 
+    ngOnDestroy(): void {
+        console.log('destroy')
+        this.interests = this.interests.map((interest) => {
+            interest.selected = false;
+            return interest;
+        });
+        this.files = this.files.map((file) => {
+            file.src = '';
+            file.value = null;
+            return file;
+        });
+
+        this.files = [];
+        this.bio = '';
+        this.basics = [];
+        this.prompts = [];
+
+    }
+
     ngOnInit(): void {
         this.userId = this.authService.getUser().id;
 
@@ -47,6 +66,9 @@ export class ProfileComponent implements OnInit {
 
 
     populateInterests(response: IGetProfileResponse) {
+        if (response.profile.interests === null) {
+            this.interests = interestsState;
+        }
         this.interests = this.interests.map((interest, index) => {
             interest.selected = response.profile.interests[index].selected;
             return interest
