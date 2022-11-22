@@ -21,6 +21,18 @@
                     [required]="lastName?.errors?.['required'] && lastName?.touched" [name]="lastName"
                     [label]="'Last Name'" [errorMsg]="'Last name  cannot exceed 75 characters'"></app-input>
             </div>
+
+
+
+
+            <app-input controlName="dob" [group]="registerForm" [id]="'dob'" [type]="'text'"
+                [required]="dob?.errors?.['required'] && email?.touched" [name]="dob" [label]="'Date (MM/DD/YYYY)'"
+                [validator]="dob?.errors?.['dateInvalid']  && dob?.dirty && dob?.touched"
+                [errorMsg]="'Please provide a valid date'"></app-input>
+
+
+
+
             <app-input controlName="email" [group]="registerForm" [id]="'email'" [type]="'email'"
                 [required]="email?.errors?.['required'] && email?.touched" [name]="email" [label]="'Email'"
                 [validator]="email?.errors?.['email']  && email?.dirty && email?.touched"

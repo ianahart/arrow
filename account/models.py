@@ -14,6 +14,8 @@ from core import settings
 from service.file_upload import FileUpload
 from service.geolocation import geoloc
 import logging
+
+from stranger.models import Stranger
 logger = logging.getLogger('django')
 
 # pyright: reportGeneralTypeIssues=false
@@ -180,6 +182,9 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, password=password, **extra_fields)
         user.set_password(password)
         user.save()
+        user.refresh_from_db()
+
+        Stranger.objects.create(user, False)
         return user
 
     def create_superuser(self, email: str, password: str, **extra_fields) -> None:
@@ -215,6 +220,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
     bio = models.CharField(max_length=150, blank=True, null=True)
     basics = models.JSONField(blank=True, null=True)
     prompts = models.JSONField(blank=True, null=True)
+    dob = models.CharField(max_length=50, blank=True, null=True)
     interests = models.JSONField(blank=True, null=True)
     email = models.EmailField(_(
         'email address'),

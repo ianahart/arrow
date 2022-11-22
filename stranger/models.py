@@ -3,8 +3,13 @@ from django.utils import timezone
 
 
 class StrangerMananger(models.Manager):
-    def create(self):
-        print('create stranger')
+    def create(self, user, seen: bool):
+        stranger = self.model(
+            user=user,
+            seen=seen,
+        )
+
+        stranger.save()
 
 
 class Stranger(models.Model):
