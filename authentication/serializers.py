@@ -38,7 +38,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'password',
-                  'email', 'gender', 'confirm_password',
+                  'email', 'gender', 'confirm_password', 'dob',
                   )
 
         extra_kwargs = {
@@ -89,7 +89,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        include = ['first_name', 'last_name', 'gender']
+        include = ['first_name', 'last_name', 'gender', 'dob']
         extra_fields = {key: val for key,
                         val in validated_data.items() if key in include}
 

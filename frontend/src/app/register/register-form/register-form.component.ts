@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/auth.service';
 import {MatchPassword} from 'src/app/validators/match-password';
+import {Date} from 'src/app/validators/date';
 @Component({
     selector: 'app-register-form',
     templateUrl: './register-form.component.html',
@@ -13,6 +14,7 @@ export class RegisterFormComponent implements OnInit {
     constructor(private fb: FormBuilder,
         private authService: AuthService,
         private matchPassword: MatchPassword,
+        private date: Date,
         private router: Router) {}
 
     passwordType = 'password';
@@ -21,6 +23,7 @@ export class RegisterFormComponent implements OnInit {
     registerForm = this.fb.group({
         firstName: ['', [Validators.required, Validators.maxLength(75)]],
         lastName: ['', [Validators.required, Validators.maxLength(75)]],
+        dob: ['', [Validators.required, this.date]],
         email: ['', [Validators.required, Validators.email]],
         gender: ['woman', [Validators.required]],
         password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$")]],
@@ -39,6 +42,7 @@ export class RegisterFormComponent implements OnInit {
         return {
             first_name: this.registerForm.value.firstName,
             last_name: this.registerForm.value.lastName,
+            dob: this.registerForm.value.dob,
             email: this.registerForm.value.email,
             gender: this.registerForm.value.gender,
             password: this.registerForm.value.password,
@@ -96,5 +100,9 @@ export class RegisterFormComponent implements OnInit {
     }
     get gender() {
         return this.registerForm.get('gender');
+    }
+
+    get dob() {
+        return this.registerForm.get('dob')
     }
 }
