@@ -22,9 +22,9 @@ class Prospect(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     seen = models.BooleanField(default=False)  # type:ignore
     denied = models.BooleanField(default=False)  # type:ignore
-    stranger = models.OneToOneField(
+    stranger = models.ForeignKey(
         'stranger.Stranger',
-        related_name='prospect',
+        related_name='prospect_strangers',
         on_delete=models.CASCADE, blank=True, null=True,
     )
     user = models.ForeignKey(
