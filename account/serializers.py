@@ -41,6 +41,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ('images', 'interests', 'basics', 'bio', 'prompts')
 
 
+class UserStrangerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('state', 'city', 'interests',
+                  'basics', 'bio', 'prompts', 'dob',
+                  'id', 'first_name', 'last_name',
+                  )
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
