@@ -9,10 +9,64 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 import logging
 
 from stranger.models import Stranger
-from stranger.serializers import StrangerSerializer
+from stranger.serializers import StrangerDenySerializer, StrangerSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class AcceptAPIView(APIView):
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+        try:
+            create_serializer = StrangerDenySerializer(data=request.data)
+            create_serializer.is_valid(raise_exception=True)
+
+            stranger = Stranger.objects.retrieve_stranger(request.user)
+
+            if stranger is None:
+                raise NotFound('No more users. Try to adjust settings.')
+
+            serializer = StrangerSerializer(stranger)
+            return Response({
+                'message': 'success',
+                'stranger': serializer.data,
+            }, status=status.HTTP_200_OK)
+
+        except ParseError as e:
+            return Response({
+                'error': str(e.detail)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DenyAPIView(APIView):
+    permission_classes = [IsAuthenticated, ]
+
+    def post(self, request):
+        try:
+
+            create_serializer = StrangerDenySerializer(data=request.data)
+            create_serializer.is_valid(raise_exception=True)
+
+            Stranger.objects.deny_user(
+                create_serializer.validated_data, request.user)
+
+            stranger = Stranger.objects.retrieve_stranger(request.user)
+
+            if stranger is None:
+                raise NotFound('No more users. Try to adjust settings.')
+
+            serializer = StrangerSerializer(stranger)
+            return Response({
+                'message': 'success',
+                'stranger': serializer.data,
+            }, status=status.HTTP_200_OK)
+
+        except ParseError as e:
+            return Response({
+                'error': str(e.detail)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ListCreateAPIView(APIView):

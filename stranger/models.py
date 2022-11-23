@@ -1,9 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from rest_framework.exceptions import NotFound
+from prospect.models import Prospect
 from service.geolocation import GeoLocation
 
 
 class StrangerMananger(models.Manager):
+
+    def deny_user(self, data, user):
+        stranger = Stranger.objects.filter(user_id=data['user'].id).first()
+        Prospect.objects.create(user, stranger, True)
 
     def create(self, user, seen: bool):
         stranger = self.model(
@@ -14,8 +20,16 @@ class StrangerMananger(models.Manager):
         stranger.save()
 
     def retrieve_stranger(self, user):
-        stranger = Stranger.objects.all().filter(
-            seen=False).exclude(user_id=user.id).first()
+        ids = Stranger.objects.all().filter(
+            prospect__denied=True).exclude(
+            user_id=user.id).values_list('user_id', flat=True)
+
+        stranger = Stranger.objects.all().exclude(
+            user_id__in=ids).exclude(user_id=user.id).first()
+
+        if stranger is None:
+            raise NotFound(
+                'No more users, try changing your location preferences.')
 
         geo = GeoLocation()
         distance = geo.get_distance(
@@ -29,8 +43,6 @@ class StrangerMananger(models.Manager):
 
         stranger.images = stranger.user.user_images.all(
         )[0:3].values_list('file_url', flat=True)
-        print(user.latitude,  ' user')
-        print(user.longitude,  ' user')
 
         return stranger
 

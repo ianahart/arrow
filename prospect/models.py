@@ -3,8 +3,15 @@ from django.utils import timezone
 
 
 class ProspectManager(models.Manager):
-    def create(self):
-        print('creating prospect')
+    def create(self, user, stranger, denied):
+        prospect_user = self.model(
+            user=user,
+            seen=True,
+            denied=denied,
+            stranger=stranger,
+        )
+
+        prospect_user.save()
 
 
 class Prospect(models.Model):
@@ -13,10 +20,12 @@ class Prospect(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
-    prospect = models.ForeignKey(
-        'account.CustomUser',
-        related_name='prospect_prospects',
-        on_delete=models.CASCADE
+    seen = models.BooleanField(default=False)  # type:ignore
+    denied = models.BooleanField(default=False)  # type:ignore
+    stranger = models.OneToOneField(
+        'stranger.Stranger',
+        related_name='prospect',
+        on_delete=models.CASCADE, blank=True, null=True,
     )
     user = models.ForeignKey(
         'account.CustomUser',
