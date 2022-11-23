@@ -13,4 +13,23 @@ export const userState = {
     logged_in: false,
 }
 
+export const strangerState = {
+    id: 0,
+    images: [],
+    seen: false,
+    seen_by: 0,
+    user_id: 0,
+    user: {
+        state: '',
+        city: '',
+        interests: [],
+        basics: [],
+        bio: '',
+        id: 0,
+        prompts: [],
+        first_name: '',
+        last_name: '',
+        dob: '',
+    }
+}
 

@@ -2,6 +2,35 @@ import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 
+export interface IStrangerUser {
+    state: string;
+    city: string;
+    interests: IProfileFormData[];
+    basics: IProfileFormData[]
+    bio: string;
+    dob: string;
+    first_name: string;
+    id: number;
+    last_name: string;
+    prompts: IProfileFormData[];
+}
+
+
+export interface IStranger {
+    id: number;
+    seen: boolean;
+    seen_by: number | null;
+    user_id: number;
+    images: string[];
+    user: IStrangerUser;
+}
+
+export interface IRetrieveStrangerResponse {
+    message: string;
+    stranger: IStranger;
+}
+
+
 
 export interface IProfile {
     images: string[];

@@ -10,8 +10,5 @@ export class ArrowHomeComponent implements OnInit {
     constructor(private arrowService: ArrowService) {}
 
     ngOnInit(): void {
-        this.arrowService.loadMatch().subscribe((response) => {
-            console.log(response)
-        })
     }
 }
