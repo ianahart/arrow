@@ -22,6 +22,7 @@ export interface IStranger {
     seen_by: number | null;
     user_id: number;
     images: string[];
+    distance: number;
     user: IStrangerUser;
 }
 

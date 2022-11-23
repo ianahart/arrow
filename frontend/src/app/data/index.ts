@@ -18,6 +18,7 @@ export const strangerState = {
     images: [],
     seen: false,
     seen_by: 0,
+    distance: 0,
     user_id: 0,
     user: {
         state: '',

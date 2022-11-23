@@ -1,6 +1,7 @@
 import geocoder
 import socket
 import requests
+from geopy.distance import geodesic
 
 
 class GeoLocation():
@@ -20,6 +21,12 @@ class GeoLocation():
             "longitude": response.get("longitude"),
         }
         return location_data
+
+    def get_distance(self, u_lat, u_long,  s_lat, s_long):
+        origin = (u_lat,  u_long)
+        distance = (s_lat, s_long)
+
+        return geodesic(origin, distance).miles
 
 
 geoloc = GeoLocation()

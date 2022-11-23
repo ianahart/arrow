@@ -118,6 +118,22 @@
 }
 
 
+.distance {
+    padding: 0.5rem;
+    color: var(--gray);
+    font-weight: bold;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+}
+
+
+.location fa-icon {
+    margin-right: 0.25rem;
+}
+
 @media (max-width: 600px) {
     .container {
         width: 95%;

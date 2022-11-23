@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from service.geolocation import GeoLocation
 
 
 class StrangerMananger(models.Manager):
@@ -16,11 +17,20 @@ class StrangerMananger(models.Manager):
         stranger = Stranger.objects.all().filter(
             seen=False).exclude(user_id=user.id).first()
 
-       # stranger = Stranger.objects.all().filter(
-        #    seen=False).exclude(user_id=user.id).filter(user_id=10).first()
+        geo = GeoLocation()
+        distance = geo.get_distance(
+            stranger.user.latitude,
+            stranger.user.longitude,
+            user.latitude,
+            user.longitude
+        )
+
+        stranger.distance = round(distance)
 
         stranger.images = stranger.user.user_images.all(
         )[0:3].values_list('file_url', flat=True)
+        print(user.latitude,  ' user')
+        print(user.longitude,  ' user')
 
         return stranger
 

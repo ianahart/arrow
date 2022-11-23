@@ -7,7 +7,9 @@ from stranger.models import Stranger
 class StrangerSerializer(serializers.ModelSerializer):
     user = UserStrangerSerializer()
     images = serializers.ListField()
+    distance = serializers.IntegerField()
 
     class Meta:
         model = Stranger
-        fields = ('id', 'seen', 'seen_by', 'user_id', 'images', 'user', )
+        fields = ('id', 'seen', 'seen_by',
+                  'user_id', 'images', 'user', 'distance', )

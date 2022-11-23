@@ -39,7 +39,6 @@
                     <p>{{ prompt.name }}</p>
                     <p>{{ prompt.value }}</p>
                 </div>
-
             </ng-container>
         </div>
     </div>
@@ -57,5 +56,12 @@
         <div *ngIf="stranger.images?.length === 3" class="photo">
             <img [src]="stranger.images[2]" />
         </div>
+    </div>
+    <div class="distance">
+        <div class="location">
+            <fa-icon [icon]="faLocationPin"></fa-icon>
+            <p>{{ stranger.user.first_name | titlecase }}'s location</p>
+        </div>
+        <p>{{ stranger.distance }} miles away</p>
     </div>
 </div>
