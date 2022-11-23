@@ -16,6 +16,7 @@ import {faBriefcase, faUserGraduate, faLocationPin, faCity} from '@fortawesome/f
 export class StrangerComponent implements OnInit {
 
     stranger: IStranger = strangerState;
+    faLocationPin = faLocationPin
 
     constructor(private strangerService: StrangerService) {}
 
