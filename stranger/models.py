@@ -20,6 +20,9 @@ class StrangerMananger(models.Manager):
         stranger.save()
 
     def retrieve_stranger(self, user):
+
+        Prospect.objects.reset(user)
+
         ids = Stranger.objects.all().filter(
             prospect_strangers__denied=True).filter(
             prospect_strangers__user_id=user.id).exclude(

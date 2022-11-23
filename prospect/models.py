@@ -1,8 +1,17 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime, timedelta
 
 
 class ProspectManager(models.Manager):
+
+    def reset(self, user):
+        Prospect.objects.all().filter(
+            user_id=user.id).filter(
+            created_at__lte=datetime.now(tz=timezone.utc) - timedelta(days=1)).filter(
+            denied=True
+        ).delete()
+
     def create(self, user, stranger, denied):
         prospect_user = self.model(
             user=user,
