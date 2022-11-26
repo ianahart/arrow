@@ -5,6 +5,12 @@ from datetime import datetime, timedelta
 
 class ProspectManager(models.Manager):
 
+    def match_prospect(self, user_one, user_two):
+        match = Prospect.objects.all().filter(
+            stranger__user_id=user_one).filter(user_id=user_two).first()
+        match.matched = True
+        match.save()
+
     def reset(self, user):
         Prospect.objects.all().filter(
             user_id=user.id).filter(
@@ -31,6 +37,7 @@ class Prospect(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     seen = models.BooleanField(default=False)  # type:ignore
     denied = models.BooleanField(default=False)  # type:ignore
+    matched = models.BooleanField(default=False)  # type:ignore
     stranger = models.ForeignKey(
         'stranger.Stranger',
         related_name='prospect_strangers',

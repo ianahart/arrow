@@ -6,6 +6,7 @@ import {ArrowHomeComponent} from './arrow-home/arrow-home.component';
 import {StrangerComponent} from './stranger/stranger.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AgePipe} from '../pipes/age';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import {AgePipe} from '../pipes/age';
         CommonModule,
         ArrowRoutingModule,
         FontAwesomeModule,
+        SharedModule,
     ]
 })
 export class ArrowModule {}

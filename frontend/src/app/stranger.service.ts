@@ -22,8 +22,8 @@ export class StrangerService {
         });
     }
 
-    acceptStranger(stranger: number) {
-        return this.http.post(`${this.baseURL}/strangers/accept/`, {
+    acceptStranger(stranger: number): Observable<IRetrieveStrangerResponse> {
+        return this.http.post<IRetrieveStrangerResponse>(`${this.baseURL}/strangers/accept/`, {
             user: stranger,
         });
     }

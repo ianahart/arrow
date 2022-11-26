@@ -3,6 +3,14 @@ from rest_framework import serializers
 from account.models import CustomUser
 
 
+class UserMatchSerializer(serializers.ModelSerializer):
+    images = serializers.ListField()
+
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'id', 'images', )
+
+
 class UserImageSerializer(serializers.Serializer):
     photo_one = serializers.ImageField(required=False)
     photo_two = serializers.ImageField(required=False)

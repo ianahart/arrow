@@ -26,9 +26,18 @@ export interface IStranger {
     user: IStrangerUser;
 }
 
+
+export interface IMatchPreview {
+    images: string[];
+    first_name: string;
+    last_name: string;
+    id: number;
+}
+
 export interface IRetrieveStrangerResponse {
     message: string;
-    stranger: IStranger;
+    stranger?: IStranger;
+    match_preview?: IMatchPreview;
 }
 
 

@@ -8,6 +8,45 @@
     min-height: 600px;
 }
 
+.page-wrapper {
+    min-height: 100vh;
+    position: relative;
+}
+
+.modal-content img {
+    width: 60px;
+    width:  60px;
+    border-radius: 50%;
+}
+
+.modal-content  {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-title {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    flex-direction: column;
+}
+
+.modal-title h3  {
+    color: var(--gray);
+}
+
+.modal-content p {
+     font-weight: bold;
+}
+
+
+.modal-title fa-icon {
+    font-size: 1.8rem;
+    color: #ffcd3c;
+}
+
 
 .error {
     display: flex;

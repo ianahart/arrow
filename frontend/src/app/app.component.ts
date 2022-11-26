@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         const tokens = localStorage.getItem('tokens')
-        if (tokens === 'null') {
+        if (tokens === 'null' || tokens === null) {
             this.loggedIn$.next(false);
             return;
         }

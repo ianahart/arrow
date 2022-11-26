@@ -6,6 +6,23 @@ from service.geolocation import GeoLocation
 
 
 class StrangerMananger(models.Manager):
+    def accept_user(self, data, user):
+
+        stranger = Stranger.objects.filter(user_id=data['user'].id).first()
+        Prospect.objects.create(user, stranger, False)
+        match = Prospect.objects.all().filter(
+            denied=False).filter(stranger__user_id=user.id).filter(
+            user_id=stranger.user_id).first()
+        if match is not None:
+            Prospect.objects.match_prospect(match.stranger.user,  match.user)
+            Prospect.objects.match_prospect(
+                match.user, match.stranger.user)
+
+            match.user.images = match.user.user_images.all(
+            )[0:3].values_list('file_url', flat=True)
+
+            return match.user
+        return None
 
     def deny_user(self, data, user):
         stranger = Stranger.objects.filter(user_id=data['user'].id).first()
@@ -24,9 +41,9 @@ class StrangerMananger(models.Manager):
         Prospect.objects.reset(user)
 
         ids = Stranger.objects.all().filter(
-            prospect_strangers__denied=True).filter(
+            prospect_strangers__seen=True).filter(
             prospect_strangers__user_id=user.id).exclude(
-            user_id=user.id).values_list('user_id', flat=True)
+            user_id=user.id).distinct().values_list('user_id', flat=True)
 
         stranger = Stranger.objects.all().exclude(
             user_id__in=ids).exclude(user_id=user.id).first()
@@ -50,6 +67,8 @@ class StrangerMananger(models.Manager):
 
         return stranger
 
+
+#
 
 class Stranger(models.Model):
 

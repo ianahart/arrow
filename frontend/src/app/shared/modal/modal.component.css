@@ -1,0 +1,41 @@
+.dimmer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0,0, .75);
+    position: absolute;
+    z-index: 3;
+}
+
+.modal {
+    background: #fff;
+    min-height: 200px;
+    border-radius: 8px;
+    width:  400px;
+    margin-bottom: 3rem;
+    padding: 0.5rem;
+}
+
+
+.close-icon-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.close-icon-container fa-icon {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+    .modal {
+        width:  95%;
+    }
+}
+

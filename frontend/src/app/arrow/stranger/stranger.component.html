@@ -1,4 +1,14 @@
-<div>
+<div class="page-wrapper">
+    <app-modal *ngIf="modalOpen" (modalEvent)="closeModal()">
+        <div class="modal-content">
+            <div class="modal-title">
+                <h3>You've got a match!</h3>
+                <fa-icon [icon]="faStar"></fa-icon>
+            </div>
+            <img *ngIf="matchPreview.images.length" [src]="matchPreview.images[0]" />
+            <p>{{ matchPreview.first_name | titlecase }}</p>
+        </div>
+    </app-modal>
     <div *ngIf="errorMsg" class="error">
         <p>{{ errorMsg }}</p>
     </div>
@@ -53,7 +63,7 @@
             </div>
         </div>
         <div class="photos">
-            <div *ngIf="stranger.images?.length > 2" class="photo">
+            <div *ngIf="stranger.images?.length >= 2" class="photo">
                 <img [src]="stranger.images[1]" />
             </div>
 
