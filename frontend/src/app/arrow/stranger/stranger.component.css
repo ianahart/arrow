@@ -185,6 +185,8 @@
     display: flex;
     justify-content: space-around;
     margin-top: 0.5rem;
+    width:  500px;
+    margin: 0 auto;
 }
 
 .btn-container fa-icon {
@@ -192,7 +194,7 @@
     cursor:pointer;
 }
 
-.accept-btn, .deny-btn {
+.accept-btn, .deny-btn, .match-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -201,6 +203,13 @@
     background-color: #f5f2f2;
     height: 60px;
     width: 60px;
+}
+
+
+.match-btn img {
+    height: 40px;
+    border-radius: 50%;
+    width: 40px;
 }
 
 .accept-btn fa-icon {
@@ -219,6 +228,9 @@
 
 @media (max-width: 600px) {
     .container {
+        width: 95%;
+    }
+    .btn-container {
         width: 95%;
     }
 }
