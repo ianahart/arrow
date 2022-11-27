@@ -1,0 +1,48 @@
+.container {
+    border: 1px solid #ccc;
+    min-height: 600px;
+    width: 1280px;
+    display:flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.matches-container  {
+    width: 300px;
+    word-break: all;
+    border-right: 1px solid  #ccc;
+    min-height: 100vh;
+}
+
+
+header {
+    text-align: center;
+}
+
+header h3 {
+    color: var(--gray);
+}
+
+
+.matches {
+    border-bottom: 1px solid #ccc;
+}
+
+@media (min-width: 800px) and (max-width: 1280px) {
+    .container {
+       width: 95%;
+    }
+}
+
+
+@media (max-width: 799px) {
+    .container  {
+        flex-direction: column;
+        width:  95%;
+    }
+
+    .matches-container   {
+        width:  95%;
+        border: none;
+    }
+}

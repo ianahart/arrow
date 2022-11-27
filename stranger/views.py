@@ -1,8 +1,5 @@
 from rest_framework.exceptions import NotFound, ParseError, ValidationError
-from django.core.exceptions import BadRequest, ObjectDoesNotExist
-from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -28,7 +25,6 @@ class AcceptAPIView(APIView):
                 create_serializer.validated_data, request.user
             )
 
-            print(result, 'dfsdfsdfd')
             if result is not None:
                 match = UserMatchSerializer(result)
                 stranger = Stranger.objects.retrieve_stranger(request.user)

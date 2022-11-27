@@ -5,6 +5,18 @@ from datetime import datetime, timedelta
 
 class ProspectManager(models.Manager):
 
+    def retrieve_matches(self, user):
+        matches = []
+        objects = Prospect.objects.all().filter(
+            matched=True).filter(
+            user_id=user.id)
+        for object in objects:
+            object.images = object.stranger.user.user_images.all(
+            )[0:3].values_list('file_url', flat=True)
+            matches.append(object)
+
+        return matches
+
     def match_prospect(self, user_one, user_two):
         match = Prospect.objects.all().filter(
             stranger__user_id=user_one).filter(user_id=user_two).first()

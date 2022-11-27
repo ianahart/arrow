@@ -2,6 +2,21 @@ import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 
+export interface IMatchPreviewResponse {
+    matches: IMatch[];
+    message: string;
+}
+
+export interface IMatch {
+    id: number;
+    images: string[];
+    stranger: {
+        id: number;
+        seen: boolean;
+        user: IUser;
+    }
+}
+
 export interface IStrangerUser {
     state: string;
     city: string;
