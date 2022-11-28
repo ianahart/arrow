@@ -2,6 +2,23 @@ import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 
+export interface IMatchPreviewResponse {
+    matches: IMatch[];
+    message: string;
+    has_next: boolean;
+    page: number;
+}
+
+export interface IMatch {
+    id: number;
+    images: string[];
+    stranger: {
+        id: number;
+        seen: boolean;
+        user: IUser;
+    }
+}
+
 export interface IStrangerUser {
     state: string;
     city: string;
@@ -33,6 +50,13 @@ export interface IMatchPreview {
     last_name: string;
     id: number;
 }
+
+
+export interface IRetrieveProfileResponse {
+    message?: string;
+    profile?: IStranger;
+}
+
 
 export interface IRetrieveStrangerResponse {
     message: string;

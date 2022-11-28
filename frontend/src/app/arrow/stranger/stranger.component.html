@@ -12,79 +12,17 @@
     <div *ngIf="errorMsg" class="error">
         <p>{{ errorMsg }}</p>
     </div>
-    <div *ngIf="!errorMsg" class="container">
-        <div class="image-container">
-            <img *ngIf="stranger.images && stranger.images.length" [src]="stranger.images[0]" />
-            <img *ngIf="stranger.images.length === 0" [src]="'../../../assets/user.png'" />
-            <div [style.position]="imagePos" class="name-container">
-                <p [style.color]="textColor" class="name">{{ stranger.user.first_name |
-                    titlecase }}
-                    {{ stranger.user.last_name | titlecase }}, </p>
-                <p [style.color]="textColor" class="dob">{{ stranger.user.dob | age }}</p>
-
-            </div>
-        </div>
-        <div *ngIf="stranger.user.basics?.length" class="wrapper">
-            <h3>My Basics</h3>
-            <div class="my-basics">
-                <div class="basic" *ngFor="let basic of stranger.user.basics">
-                    <fa-icon [icon]="basic.icon"></fa-icon>
-                    <p>{{ basic.value }}</p>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="stranger.user.interests?.length" class="wrapper">
-            <h3>My Interests</h3>
-            <div class="my-interests">
-                <ng-container *ngFor="let interest of stranger.user.interests">
-                    <div class="interest" *ngIf="interest.selected">
-                        <p class="interest-icon">{{ interest.value }}</p>
-                        <p>{{ interest.name }}</p>
-                    </div>
-
-                </ng-container>
-            </div>
-        </div>
-        <div *ngIf="stranger.user.prompts?.length" class="wrapper">
-            <h3>My Prompts</h3>
-            <div class="my-prompts">
-                <ng-container *ngFor="let prompt of stranger.user.prompts">
-                    <div class="prompt" *ngIf="prompt.selected">
-                        <p>{{ prompt.name }}</p>
-                        <p>{{ prompt.value }}</p>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-        <div class="wrapper">
-            <h3>Bio</h3>
-            <div *ngIf="stranger.user.bio !== null" class="bio-container">
-                <p>{{ stranger.user.bio }}</p>
-            </div>
-        </div>
-        <div class="photos">
-            <div *ngIf="stranger.images?.length >= 2" class="photo">
-                <img [src]="stranger.images[1]" />
-            </div>
-
-            <div *ngIf="stranger.images?.length === 3" class="photo">
-                <img [src]="stranger.images[2]" />
-            </div>
-        </div>
-        <div class="distance">
-            <div class="location">
-                <fa-icon [icon]="faLocationPin"></fa-icon>
-                <p>{{ stranger.user.first_name | titlecase }}'s location</p>
-            </div>
-            <p>{{ stranger.distance }} miles away</p>
-        </div>
-    </div>
+    <ng-container *ngIf="!errorMsg">
+        <app-profile [user]="stranger"></app-profile>
+    </ng-container>
     <div *ngIf="!errorMsg" class="btn-container">
         <div (click)="onDeny()" class="deny-btn">
             <fa-icon [icon]="faClose"></fa-icon>
         </div>
         <div class="match-btn">
-            <img src="../../../assets/logo.png" />
+            <a routerLink="./matches">
+                <img src="../../../assets/logo.png" />
+            </a>
         </div>
         <div (click)="onAccept()" class="accept-btn">
             <fa-icon [icon]="faHeart"></fa-icon>

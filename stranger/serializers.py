@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from account.models import CustomUser
-from account.serializers import UserStrangerSerializer
+from account.serializers import UserSerializer, UserStrangerSerializer
 
 from stranger.models import Stranger
 
@@ -17,6 +17,14 @@ class StrangerDenySerializer(serializers.ModelSerializer):
     class Meta:
         model = Stranger
         fields = ('user', )
+
+
+class StrangerProspectSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Stranger
+        fields = ('id',  'user', 'user_id',  'seen',)
 
 
 class StrangerSerializer(serializers.ModelSerializer):

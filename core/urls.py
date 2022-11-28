@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/v1/', include(('account.urls', 'account'))),
     path('api/v1/', include(('match.urls', 'match'))),
     path('api/v1/', include(('stranger.urls', 'stranger'))),
+    path('api/v1/', include(('prospect.urls', 'prospect'))),
 ]

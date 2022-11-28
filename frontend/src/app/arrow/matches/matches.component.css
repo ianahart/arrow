@@ -1,0 +1,97 @@
+.container {
+    border: 1px solid #ccc;
+    min-height: 600px;
+    width: 1280px;
+    display:flex;
+    flex-direction: row;
+    margin: 0 auto;
+}
+
+.matches-container  {
+    width: 300px;
+    word-break: all;
+    border-right: 1px solid  #ccc;
+    min-height: 100vh;
+}
+
+
+header {
+    text-align: center;
+}
+
+header h3 {
+    color: var(--gray);
+}
+
+
+.matches {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    width:  300px;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.matches fa-icon {
+    font-size: 1.5rem;
+    color: var(--gray);
+    margin: 1rem;
+    cursor: pointer;
+}
+
+
+.match  {
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.match a {
+    text-decoration: none;
+}
+
+.match p {
+    margin-top:  0.2rem;
+    text-align: center;
+    color: var(--gray);
+}
+
+
+.image-container {
+    background: var(--purple);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.image-container img {
+  width: 45px;
+  height: 45px;
+    border-radius: 50%;
+}
+
+
+
+@media (min-width: 800px) and (max-width: 1280px) {
+    .container {
+       width: 95%;
+    }
+}
+
+
+@media (max-width: 799px) {
+    .container  {
+        flex-direction: column;
+        width:  95%;
+    }
+
+    .matches-container   {
+        width:  95%;
+        border: none;
+    }
+}

@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="image-container">
+        <img *ngIf="user.images && user.images.length" [src]="user.images[0]" />
+        <img *ngIf="user.images.length === 0" [src]="'../../../assets/user.png'" />
+        <div [style.position]="imagePos" class="name-container">
+            <p [style.color]="textColor" class="name">{{ user.user.first_name |
+                titlecase }}
+                {{ user.user.last_name | titlecase }}, </p>
+            <p [style.color]="textColor" class="dob">{{ user.user.dob | age }}</p>
+
+        </div>
+    </div>
+    <div *ngIf="user.user.basics?.length" class="wrapper">
+        <h3>My Basics</h3>
+        <div class="my-basics">
+            <div class="basic" *ngFor="let basic of user.user.basics">
+                <fa-icon [icon]="basic.icon"></fa-icon>
+                <p>{{ basic.value }}</p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="user.user.interests?.length" class="wrapper">
+        <h3>My Interests</h3>
+        <div class="my-interests">
+            <ng-container *ngFor="let interest of user.user.interests">
+                <div class="interest" *ngIf="interest.selected">
+                    <p class="interest-icon">{{ interest.value }}</p>
+                    <p>{{ interest.name }}</p>
+                </div>
+
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="user.user.prompts?.length" class="wrapper">
+        <h3>My Prompts</h3>
+        <div class="my-prompts">
+            <ng-container *ngFor="let prompt of user.user.prompts">
+                <div class="prompt" *ngIf="prompt.selected">
+                    <p>{{ prompt.name }}</p>
+                    <p>{{ prompt.value }}</p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="wrapper">
+        <h3>Bio</h3>
+        <div *ngIf="user.user.bio !== null" class="bio-container">
+            <p>{{ user.user.bio }}</p>
+        </div>
+    </div>
+    <div class="photos">
+        <div *ngIf="user.images?.length >= 2" class="photo">
+            <img [src]="user.images[1]" />
+        </div>
+
+        <div *ngIf="user.images?.length === 3" class="photo">
+            <img [src]="user.images[2]" />
+        </div>
+    </div>
+    <div class="distance">
+        <div class="location">
+            <fa-icon [icon]="faLocationPin"></fa-icon>
+            <p>{{ user.user.first_name | titlecase }}'s location</p>
+        </div>
+        <p>{{ user.distance }} miles away</p>
+    </div>
+</div>

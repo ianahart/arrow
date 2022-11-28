@@ -1,8 +1,5 @@
 from rest_framework.exceptions import NotFound, ParseError, ValidationError
-from django.core.exceptions import BadRequest, ObjectDoesNotExist
-from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -14,6 +11,29 @@ from stranger.serializers import StrangerDenySerializer, StrangerSerializer
 
 
 logger = logging.getLogger('django')
+
+
+class DetailsAPIView(APIView):
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request,  pk: int):
+        try:
+
+            result = Stranger.objects.retrieve_profile(pk, request.user)
+
+            serializer = StrangerSerializer(result)
+
+            return Response({
+                'message': 'success',
+                'profile':  serializer.data
+            }, status=status.HTTP_200_OK)
+
+        except NotFound:
+            return Response(
+                {
+                    'error': 'Could not load user\'s profile'
+                }, status=status.HTTP_404_NOT_FOUND
+            )
 
 
 class AcceptAPIView(APIView):
@@ -28,7 +48,6 @@ class AcceptAPIView(APIView):
                 create_serializer.validated_data, request.user
             )
 
-            print(result, 'dfsdfsdfd')
             if result is not None:
                 match = UserMatchSerializer(result)
                 stranger = Stranger.objects.retrieve_stranger(request.user)
