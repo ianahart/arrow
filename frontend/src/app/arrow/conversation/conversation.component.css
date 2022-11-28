@@ -1,0 +1,37 @@
+.container {
+    min-height: 100vh;
+}
+
+
+.conversation-container {
+    border: 1px solid blue;
+    padding: 0.5rem;
+    display:  flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.form-container {
+    width: 100%;
+}
+
+.form-container input {
+    width: 80%;
+    border:  none;
+    border: 1px solid #ccc;
+    height: 35px;
+    border-radius: 8px;
+}
+
+
+.form-container form  {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.form-container form button {
+    width: 80px;
+}
+

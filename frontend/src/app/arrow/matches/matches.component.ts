@@ -17,6 +17,7 @@ export class MatchesComponent implements OnInit {
     error = '';
     has_next = false;
     faChevronRight = faChevronRight;
+    curConversation = 0;
 
     constructor(private arrowService: ArrowService) {}
 
@@ -44,4 +45,34 @@ export class MatchesComponent implements OnInit {
         })
 
     }
+
+    showConversation(id: number) {
+        this.curConversation = id;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

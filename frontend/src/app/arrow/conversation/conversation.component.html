@@ -1,0 +1,14 @@
+<div *ngIf="curConversation !== 0" class="container">
+    <div class="conversation-container">
+        <div class="conversation">
+            <p>conversation goes here</p>
+            <p>user: {{ curConversation }}</p>
+        </div>
+        <div class="form-container">
+            <form [formGroup]="messageForm" (ngSubmit)="onSubmit($event)">
+                <input name="message" formControlName="message" placeholder="Send message" type="text" />
+                <button class="primary-btn">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
