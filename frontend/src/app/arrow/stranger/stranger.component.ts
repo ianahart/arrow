@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {strangerState} from 'src/app/data';
 import {IMatchPreview, IStranger} from 'src/app/interfaces';
 import {StrangerService} from 'src/app/stranger.service';
-import {faHeart, faStar, faLocationPin, faClose} from '@fortawesome/free-solid-svg-icons';
+import {faHeart, faStar, faClose} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -18,7 +18,6 @@ export class StrangerComponent implements OnInit {
     stranger: IStranger = strangerState;
     matchPreview: IMatchPreview = {images: [], first_name: '', last_name: '', id: 0}
     errorMsg = '';
-    faLocationPin = faLocationPin;
     faClose = faClose;
     faHeart = faHeart;
     faStar = faStar;
@@ -96,13 +95,6 @@ export class StrangerComponent implements OnInit {
     }
 
 
-    get textColor() {
-        return this.stranger.images.length ? '#fff' : '#000';
-    }
-
-    get imagePos() {
-        return this.stranger.images.length ? 'absolute' : 'relative';
-    }
 
 }
 

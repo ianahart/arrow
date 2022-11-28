@@ -1,21 +1,32 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime, timedelta
+from django.core.paginator import Paginator
 
 
 class ProspectManager(models.Manager):
 
-    def retrieve_matches(self, user):
+    def retrieve_matches(self, user, page):
         matches = []
-        objects = Prospect.objects.all().filter(
+        objects = Prospect.objects.all().order_by('-id').filter(
             matched=True).filter(
             user_id=user.id)
-        for object in objects:
+
+        paginator = Paginator(objects, 1)
+        next_page = int(page) + 1
+        cur_page = paginator.page(next_page)
+        object_list = cur_page.object_list
+
+        for object in object_list:
             object.images = object.stranger.user.user_images.all(
             )[0:3].values_list('file_url', flat=True)
             matches.append(object)
 
-        return matches
+        return {
+            'has_next': cur_page.has_next(),
+            'page': next_page,
+            'matches':  matches
+        }
 
     def match_prospect(self, user_one, user_two):
         match = Prospect.objects.all().filter(

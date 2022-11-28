@@ -3,8 +3,16 @@
         <header>
             <h3>Matches Queue</h3>
         </header>
-        <div class="matches">
-
+        <div *ngIf="matches.length" class="matches">
+            <div *ngFor="let match of matches" class="match">
+                <a [routerLink]="'/arrow/profile/' + match.stranger.user.id">
+                    <div class="image-container">
+                        <img *ngIf="match.images?.length" [src]="match.images[0]" />
+                    </div>
+                    <p>{{ match.stranger.user.first_name | titlecase }}</p>
+                </a>
+            </div>
+            <fa-icon *ngIf="has_next" (click)="loadMoreMatches()" [icon]="faChevronRight"></fa-icon>
         </div>
     </div>
     <div>

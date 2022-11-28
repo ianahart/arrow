@@ -21,11 +21,15 @@ class ListCreateAPIView(APIView):
     def get(self, request):
         try:
 
-            matches = Prospect.objects.retrieve_matches(request.user)
-            serializer = ProspectSerializer(matches,  many=True)
+            page = request.query_params['page']
+            result = Prospect.objects.retrieve_matches(request.user, page)
+
+            serializer = ProspectSerializer(result['matches'],  many=True)
             return Response({
                 'message': 'success',
                 'matches': serializer.data,
+                'has_next': result['has_next'],
+                'page':  result['page'],
             }, status=status.HTTP_200_OK)
 
         except NotFound:

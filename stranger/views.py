@@ -13,6 +13,29 @@ from stranger.serializers import StrangerDenySerializer, StrangerSerializer
 logger = logging.getLogger('django')
 
 
+class DetailsAPIView(APIView):
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request,  pk: int):
+        try:
+
+            result = Stranger.objects.retrieve_profile(pk, request.user)
+
+            serializer = StrangerSerializer(result)
+
+            return Response({
+                'message': 'success',
+                'profile':  serializer.data
+            }, status=status.HTTP_200_OK)
+
+        except NotFound:
+            return Response(
+                {
+                    'error': 'Could not load user\'s profile'
+                }, status=status.HTTP_404_NOT_FOUND
+            )
+
+
 class AcceptAPIView(APIView):
     permission_classes = [IsAuthenticated, ]
 

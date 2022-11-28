@@ -6,6 +6,25 @@ from service.geolocation import GeoLocation
 
 
 class StrangerMananger(models.Manager):
+
+    def retrieve_profile(self, id: int, user):
+        profile = Stranger.objects.all().filter(user_id=id).first()
+
+        geo = GeoLocation()
+        distance = geo.get_distance(
+            profile.user.latitude,
+            profile.user.longitude,
+            user.latitude,
+            user.longitude
+        )
+
+        profile.distance = round(distance)
+
+        profile.images = profile.user.user_images.all(
+        )[0:3].values_list('file_url', flat=True)
+
+        return profile
+
     def accept_user(self, data, user):
 
         stranger = Stranger.objects.filter(user_id=data['user'].id).first()
@@ -13,6 +32,7 @@ class StrangerMananger(models.Manager):
         match = Prospect.objects.all().filter(
             denied=False).filter(stranger__user_id=user.id).filter(
             user_id=stranger.user_id).first()
+
         if match is not None:
             Prospect.objects.match_prospect(match.stranger.user,  match.user)
             Prospect.objects.match_prospect(

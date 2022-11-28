@@ -26,7 +26,56 @@ header h3 {
 
 .matches {
     border-bottom: 1px solid #ccc;
+    display: flex;
+    width:  300px;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: space-between;
 }
+
+
+.matches fa-icon {
+    font-size: 1.5rem;
+    color: var(--gray);
+    margin: 1rem;
+    cursor: pointer;
+}
+
+
+.match  {
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.match a {
+    text-decoration: none;
+}
+
+.match p {
+    margin-top:  0.2rem;
+    text-align: center;
+    color: var(--gray);
+}
+
+
+.image-container {
+    background: var(--purple);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.image-container img {
+  width: 45px;
+  height: 45px;
+    border-radius: 50%;
+}
+
+
 
 @media (min-width: 800px) and (max-width: 1280px) {
     .container {

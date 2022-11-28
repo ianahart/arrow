@@ -5,6 +5,8 @@ import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 export interface IMatchPreviewResponse {
     matches: IMatch[];
     message: string;
+    has_next: boolean;
+    page: number;
 }
 
 export interface IMatch {
@@ -48,6 +50,13 @@ export interface IMatchPreview {
     last_name: string;
     id: number;
 }
+
+
+export interface IRetrieveProfileResponse {
+    message?: string;
+    profile?: IStranger;
+}
+
 
 export interface IRetrieveStrangerResponse {
     message: string;
