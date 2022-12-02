@@ -1,0 +1,51 @@
+.matches {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+
+.match {
+    cursor:  pointer;
+}
+
+.matches h3 {
+    text-align: center;
+    color: var(--gray);
+}
+
+
+.name {
+    margin-left: 1rem;
+}
+
+.image-container  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    background: var(--teal);
+}
+
+.image-container img {
+    border-radius: 50%;
+    height:  65px;
+    width:  65px;
+}
+
+
+.matches a {
+    text-decoration: none;
+    color:  var(--gray);
+}
+
+
+.has-more  {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--gray);
+    cursor: pointer;
+}

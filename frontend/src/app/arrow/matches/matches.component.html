@@ -8,14 +8,18 @@
                 <a [routerLink]="'/arrow/profile/' + match.stranger.user.id">
                     <div class="image-container">
                         <img *ngIf="match.images?.length" [src]="match.images[0]" />
+                        <img class="no-user-image" *ngIf="!match.images.length" [src]="'../../../assets/user.png'" />
                     </div>
                     <p>{{ match.stranger.user.first_name | titlecase }}</p>
                 </a>
             </div>
             <fa-icon *ngIf="has_next" (click)="loadMoreMatches()" [icon]="faChevronRight"></fa-icon>
         </div>
+        <app-conversations (showConversationEvent)="showConversation($event)" (loadMoreEvent)="loadMoreMatches()"
+            [has_next]="has_next" [matches]="matches">
+        </app-conversations>
     </div>
-    <div>
-        <p>Conversation messages here</p>
+    <div class="conversations-container">
+        <app-conversation [curConversation]="curConversation"></app-conversation>
     </div>
 </div>

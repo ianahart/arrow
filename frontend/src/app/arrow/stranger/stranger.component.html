@@ -15,8 +15,8 @@
     <ng-container *ngIf="!errorMsg">
         <app-profile [user]="stranger"></app-profile>
     </ng-container>
-    <div *ngIf="!errorMsg" class="btn-container">
-        <div (click)="onDeny()" class="deny-btn">
+    <div class="btn-container">
+        <div *ngIf="!errorMsg" (click)="onDeny()" class="deny-btn">
             <fa-icon [icon]="faClose"></fa-icon>
         </div>
         <div class="match-btn">
@@ -24,7 +24,7 @@
                 <img src="../../../assets/logo.png" />
             </a>
         </div>
-        <div (click)="onAccept()" class="accept-btn">
+        <div *ngIf="!errorMsg" (click)="onAccept()" class="accept-btn">
             <fa-icon [icon]="faHeart"></fa-icon>
         </div>
     </div>
