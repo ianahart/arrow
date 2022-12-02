@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {IRegisterForm, IUser, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse, IForgotPasswordForm, IPasswordResetForm} from './interfaces';
+import {IRegisterForm, IUser, IGroup, IRefreshUserResponse, ILoginForm, ITokens, ILoginResponse, ILogoutResponse, IForgotPasswordForm, IPasswordResetForm, ICreateGroupResponse} from './interfaces';
 import {Observable, BehaviorSubject, tap} from 'rxjs';
-import {userState} from './data';
+import {userState, groupState} from './data';
 import {catchError, of} from 'rxjs';
 
 
@@ -14,12 +14,18 @@ import {catchError, of} from 'rxjs';
 export class AuthService {
     private baseURL = 'http://localhost:4200/api/v1'
     private user: IUser = userState;
+    private group: IGroup = groupState;
     loggedIn$ = new BehaviorSubject<boolean | null>(null);
 
 
     constructor(private http: HttpClient) {
     }
 
+
+
+    getGroup() {
+        return this.group;
+    }
 
     setTokens(tokens: ITokens | null) {
         localStorage.setItem('tokens', JSON.stringify(tokens))
@@ -31,6 +37,11 @@ export class AuthService {
 
     setUser(user: IUser) {
         this.user = user
+    }
+
+
+    setGroup(group: IGroup) {
+        this.group = group;
     }
 
     getTokens() {
@@ -104,6 +115,14 @@ export class AuthService {
                 this.loggedIn$.next(false)
             })
         )
+    }
+
+
+    createOrGetGroup(receiver: number, sender: number): Observable<ICreateGroupResponse> {
+        return this.http.post<ICreateGroupResponse>(`${this.baseURL}/groups/`, {
+            user_one: receiver,
+            user_two: sender,
+        })
     }
 
 

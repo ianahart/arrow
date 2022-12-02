@@ -4,9 +4,10 @@
 
 
 .conversation-container {
-    border: 1px solid blue;
     padding: 0.5rem;
     display:  flex;
+    height: 550px;
+    overflow-y: auto;
     flex-direction: column;
     justify-content: center;
 }
@@ -34,4 +35,66 @@
 .form-container form button {
     width: 80px;
 }
+
+.conversations  {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+
+.conversation-position  {
+    margin-left: auto;
+}
+
+.conversation  {
+    width: 80%;
+    word-break: break-all;
+    margin-top: 1rem;
+    margin-bottom:  1rem;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+
+}
+
+.name p {
+    color: var(--gray);
+}
+
+
+.name .image-container {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background:  #006AFF;
+    margin-right: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.name .image-container img{
+    width:  40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+
+.text {
+    background: #006AFF;
+    color:   #fff;
+    padding:  0.5rem;
+    padding-top: 0.2rem;
+    border-radius: 20px;
+    word-break: break-all;
+
+}
+
+
 

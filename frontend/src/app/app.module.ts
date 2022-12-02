@@ -10,6 +10,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AuthNavBarComponent} from './auth-nav-bar/auth-nav-bar.component';
 import {AuthHttpInterceptor} from './auth-http-interceptor';
 import {SharedModule} from './shared/shared.module';
+import {AuthService} from './auth.service';
+import {WebsocketService} from './websocket.service';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import {SharedModule} from './shared/shared.module';
         SharedModule,
     ],
     providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}
+        {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true},
+        AuthService,
+        WebsocketService,
     ],
     bootstrap: [AppComponent]
 })

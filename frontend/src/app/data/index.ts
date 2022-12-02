@@ -13,6 +13,12 @@ export const userState = {
     logged_in: false,
 }
 
+export const groupState = {
+    id: 0,
+    user_one: 0,
+    user_two: 0,
+}
+
 export const strangerState = {
     id: 0,
     images: [],

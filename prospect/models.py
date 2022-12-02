@@ -35,10 +35,11 @@ class ProspectManager(models.Manager):
         match.save()
 
     def reset(self, user):
+        # denied=True
         Prospect.objects.all().filter(
             user_id=user.id).filter(
             created_at__lte=datetime.now(tz=timezone.utc) - timedelta(days=1)).filter(
-            denied=True
+            matched=False
         ).delete()
 
     def create(self, user, stranger, denied):

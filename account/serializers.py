@@ -69,3 +69,9 @@ class UserSerializer(serializers.ModelSerializer):
                   'state',
                   'id',
                   )
+
+
+class UserBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'id',)

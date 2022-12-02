@@ -33,6 +33,32 @@ export interface IStrangerUser {
 }
 
 
+
+export interface IMessage {
+    id: number;
+    sender: {first_name: string, last_name: string, id: number};
+    group: number;
+    receiver: {first_name: string, last_name: string, id: number};
+    text: string;
+}
+
+export interface IMessagesResponse {
+    message?: string;
+    messages: IMessage[]
+}
+
+export interface IGroup {
+    id: number;
+    user_one: number;
+    user_two: number;
+
+}
+
+export interface ICreateGroupResponse {
+    message?: string;
+    group: IGroup;
+}
+
 export interface IStranger {
     id: number;
     seen: boolean;

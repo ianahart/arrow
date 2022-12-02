@@ -12,6 +12,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {MatchProfileComponent} from './match-profile/match-profile.component';
 import {ConversationsComponent} from './conversations/conversations.component';
 import {ConversationComponent} from './conversation/conversation.component';
+import {AuthService} from '../auth.service';
 
 @NgModule({
     declarations: [
