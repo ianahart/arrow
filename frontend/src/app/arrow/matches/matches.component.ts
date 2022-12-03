@@ -32,6 +32,16 @@ export class MatchesComponent implements OnInit {
         })
     }
 
+    unmatch(id: number) {
+        this.matches = this.matches.filter((match) => match.stranger.user.id !== id)
+        this.curConversation = 0;
+        this.arrowService.unmatch(id).subscribe((response) => {
+
+        }, (err) => {
+            console.log(err)
+        })
+    }
+
 
     loadMoreMatches() {
         if (!this.has_next) return;

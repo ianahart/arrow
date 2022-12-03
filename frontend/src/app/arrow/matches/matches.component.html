@@ -15,8 +15,8 @@
             </div>
             <fa-icon *ngIf="has_next" (click)="loadMoreMatches()" [icon]="faChevronRight"></fa-icon>
         </div>
-        <app-conversations (showConversationEvent)="showConversation($event)" (loadMoreEvent)="loadMoreMatches()"
-            [has_next]="has_next" [matches]="matches">
+        <app-conversations (unmatchEvent)="unmatch($event)" (showConversationEvent)="showConversation($event)"
+            (loadMoreEvent)="loadMoreMatches()" [has_next]="has_next" [matches]="matches">
         </app-conversations>
     </div>
     <div class="conversations-container">

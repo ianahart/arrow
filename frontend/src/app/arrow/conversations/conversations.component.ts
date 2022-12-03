@@ -11,7 +11,7 @@ export class ConversationsComponent implements OnInit {
     @Input() has_next: boolean = false;
     @Output() loadMoreEvent = new EventEmitter()
     @Output() showConversationEvent = new EventEmitter<number>()
-
+    @Output() unmatchEvent = new EventEmitter<number>()
 
     constructor() {}
 
@@ -24,5 +24,9 @@ export class ConversationsComponent implements OnInit {
 
     onHasMore() {
         this.loadMoreEvent.emit()
+    }
+
+    onUnmatch(id: number) {
+        this.unmatchEvent.emit(id)
     }
 }

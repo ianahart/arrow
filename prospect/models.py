@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
@@ -51,6 +52,15 @@ class ProspectManager(models.Manager):
         )
 
         prospect_user.save()
+
+    def delete(self,  user_id: int, stranger_id: int):
+        matches = Prospect.objects.all().filter(
+            Q(stranger__user_id=stranger_id) & Q(user_id=user_id) |
+            Q(stranger__user_id=user_id) & Q(user_id=stranger_id)
+        )
+
+        for match in matches:
+            match.delete()
 
 
 class Prospect(models.Model):

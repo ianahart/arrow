@@ -10,6 +10,9 @@ export class ArrowService {
     private baseURL = 'http://localhost:4200/api/v1'
     constructor(private http: HttpClient) {}
 
+    unmatch(id: number) {
+        return this.http.delete(`${this.baseURL}/prospects/${id}/`)
+    }
 
     loadMatches(page: number): Observable<IMatchPreviewResponse> {
         return this.http.get<IMatchPreviewResponse>(`${this.baseURL}/prospects/?page=${page}`)
