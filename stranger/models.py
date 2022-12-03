@@ -77,11 +77,10 @@ class StrangerMananger(models.Manager):
             stranger.user.latitude,
             stranger.user.longitude,
             user.latitude,
-            user.longitude
+            '-' + user.longitude.replace('-', '')
         )
 
         stranger.distance = round(distance)
-
         stranger.images = stranger.user.user_images.all(
         )[0:3].values_list('file_url', flat=True)
 
