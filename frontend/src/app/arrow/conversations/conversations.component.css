@@ -17,7 +17,24 @@
 
 .name {
     margin-left: 1rem;
+    color: var(--gray);
+
 }
+
+
+.match-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.match-content p:last-of-type {
+    color: var(--gray);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+
 
 .image-container  {
     display: flex;

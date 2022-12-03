@@ -1,13 +1,18 @@
-<div *ngIf="matches.length" class="matches">
+<div class="matches">
     <h3>Conversations</h3>
-    <div *ngFor="let match of matches" class="match">
-        <div (click)="onShowConversation(match.stranger.user_id)">
-            <div class="image-container">
-                <img *ngIf="match.images?.length" [src]="match.images[0]" />
-                <img class="no-user-image" *ngIf="!match.images.length" [src]="'../../../assets/user.png'" />
+    <ng-container *ngIf="matches.length">
+        <div *ngFor="let match of matches" class="match">
+            <div (click)="onShowConversation(match.stranger.user_id)">
+                <div class="image-container">
+                    <img *ngIf="match.images?.length" [src]="match.images[0]" />
+                    <img class="no-user-image" *ngIf="!match.images.length" [src]="'../../../assets/user.png'" />
+                </div>
+                <div class="match-content">
+                    <p class="name">{{ match.stranger.user.first_name | titlecase }}</p>
+                    <p (click)="onUnmatch(match.stranger.user_id)">Unmatch</p>
+                </div>
             </div>
-            <p class="name">{{ match.stranger.user.first_name | titlecase }}</p>
         </div>
-    </div>
+    </ng-container>
     <p class="has-more" *ngIf="has_next" (click)="onHasMore()">Load more...</p>
 </div>
