@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
+import {ReactiveFormsModule} from '@angular/forms';
 import {SettingsRoutingModule} from './settings-routing.module';
 import {SettingsHomeComponent} from './settings-home/settings-home.component';
 import {PreferencesComponent} from './preferences/preferences.component';
@@ -13,7 +13,7 @@ import {PromptsComponent} from './prompts/prompts.component';
 import {PromptComponent} from './prompt/prompt.component';
 import {BioComponent} from './bio/bio.component';
 import {BasicsComponent} from './basics/basics.component';
-import { UploaderComponent } from './uploader/uploader.component';
+import {UploaderComponent} from './uploader/uploader.component';
 @NgModule({
     declarations: [
         SettingsHomeComponent,
@@ -32,6 +32,7 @@ import { UploaderComponent } from './uploader/uploader.component';
         CommonModule,
         SettingsRoutingModule,
         FontAwesomeModule,
+        ReactiveFormsModule,
     ]
 })
 export class SettingsModule {}

@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/v1/', include(('stranger.urls', 'stranger'))),
     path('api/v1/', include(('prospect.urls', 'prospect'))),
     path('api/v1/', include(('message.urls', 'message'))),
+    path('api/v1/', include(('setting.urls', 'setting'))),
 ]

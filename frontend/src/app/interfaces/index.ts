@@ -2,6 +2,22 @@ import {AbstractControl} from "@angular/forms";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 
 
+
+
+export interface ISetting {
+    id: number;
+    user: number;
+    distance_away: number;
+    age: number;
+    gender: string;
+}
+
+export interface ICreateSettingsResponse {
+    message: string;
+    settings: ISetting;
+}
+
+
 export interface IMatchPreviewResponse {
     matches: IMatch[];
     message: string;

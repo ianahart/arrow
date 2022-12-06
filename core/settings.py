@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'match',
     'prospect',
     'stranger',
+    'setting',
 ]
 
 

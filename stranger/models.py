@@ -58,34 +58,71 @@ class StrangerMananger(models.Manager):
 
     def retrieve_stranger(self, user):
 
+        user_radius = 10
         Prospect.objects.reset(user)
+        geo = GeoLocation()
 
         ids = Stranger.objects.all().filter(
             prospect_strangers__seen=True).filter(
             prospect_strangers__user_id=user.id).exclude(
             user_id=user.id).distinct().values_list('user_id', flat=True)
 
-        stranger = Stranger.objects.all().exclude(
-            user_id__in=ids).exclude(user_id=user.id).first()
+        strangers = Stranger.objects.all().exclude(
+            user_id__in=ids).exclude(user_id=user.id)
 
-        if stranger is None:
+        for stranger in strangers:
+            distance = geo.get_distance(
+                stranger.user.latitude,
+                stranger.user.longitude,
+                user.latitude,
+                '-' + user.longitude.replace('-', '')
+            )
+            stranger.images = stranger.user.user_images.all(
+            )[0:3].values_list('file_url', flat=True)
+
+            stranger.distance = distance
+
+        strangers = [
+            stranger for stranger in strangers if stranger.distance <= user.user_settings.distance_away]
+
+        print(strangers)
+        if len(strangers) == 0:
             raise NotFound(
                 'No more users, try changing your location preferences.')
 
-        geo = GeoLocation()
-        distance = geo.get_distance(
-            stranger.user.latitude,
-            stranger.user.longitude,
-            user.latitude,
-            '-' + user.longitude.replace('-', '')
-        )
+        return strangers[0]
 
-        stranger.distance = round(distance)
-        stranger.images = stranger.user.user_images.all(
-        )[0:3].values_list('file_url', flat=True)
 
-        return stranger
-
+#    def retrieve_stranger(self, user):
+#
+#        Prospect.objects.reset(user)
+#
+#        ids = Stranger.objects.all().filter(
+#            prospect_strangers__seen=True).filter(
+#            prospect_strangers__user_id=user.id).exclude(
+#            user_id=user.id).distinct().values_list('user_id', flat=True)
+#
+#        stranger = Stranger.objects.all().exclude(
+#            user_id__in=ids).exclude(user_id=user.id).first()
+#
+#        if stranger is None:
+#            raise NotFound(
+#                'No more users, try changing your location preferences.')
+#
+#        geo = GeoLocation()
+#        distance = geo.get_distance(
+#            stranger.user.latitude,
+#            stranger.user.longitude,
+#            user.latitude,
+#            '-' + user.longitude.replace('-', '')
+#        )
+#
+#        stranger.distance = round(distance)
+#        stranger.images = stranger.user.user_images.all(
+#        )[0:3].values_list('file_url', flat=True)
+#
+#        return stranger
+#
 
 #
 

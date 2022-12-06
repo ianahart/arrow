@@ -1,1 +1,39 @@
-<p>filters works!</p>
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="distance-container">
+            <p class="title">Distance</p>
+            <div class="input-container">
+                <p class="distance-away">{{ distance_away?.value }} miles away</p>
+                <input [formControl]="distance_away" class="slider" max="100" min="0" type="range" />
+            </div>
+        </div>
+        <div class="age-container">
+            <p class="title">Age</p>
+            <div class="input-container">
+                <p class="age">{{ age ?.value }} years old</p>
+                <input [formControl]="age" class="slider" max="100" min="18" type="range" />
+            </div>
+        </div>
+
+        <div class="gender-container">
+            <p class="title">Gender</p>
+            <div>
+                <label class="radio-container">Woman
+                    <input type="radio" value="woman" [formControl]="gender" checked="checked">
+                    <span class="radio-checkmark"></span>
+                </label>
+                <label class="radio-container">Man
+                    <input type="radio" value="man" [formControl]="gender">
+                    <span class="radio-checkmark"></span>
+                </label>
+                <label class="radio-container">Non-binary
+                    <input type="radio" value="nonbinary" [formControl]="gender">
+                    <span class="radio-checkmark"></span>
+                </label>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button type="submit" class="primary-btn">Apply Filters</button>
+        </div>
+    </form>
+</div>
