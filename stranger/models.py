@@ -1,4 +1,5 @@
 from django.db import models
+from django.http.response import datetime
 from django.utils import timezone
 from rest_framework.exceptions import NotFound
 from prospect.models import Prospect
@@ -66,16 +67,23 @@ class StrangerMananger(models.Manager):
                 user.latitude,
                 user_longitude
             )
+            stranger.age = self.__get_age(stranger.user.dob)
             stranger.images = stranger.user.user_images.all(
             )[0:3].values_list('file_url', flat=True)
 
             stranger.distance = distance
 
+    def __get_age(self, dob: str):
+        format_str = '%m/%d/%Y'
+        datetime_obj = datetime.datetime.strptime(dob, format_str)
+
+        return datetime.datetime.now().year - datetime_obj.year
+
     def retrieve_stranger(self, user):
 
         Prospect.objects.reset(user)
         geo = GeoLocation()
-        print(user.dob)
+        user_dob = self.__get_age(user.dob)
 
         ids = Stranger.objects.all().filter(
             prospect_strangers__seen=True).filter(
@@ -88,9 +96,14 @@ class StrangerMananger(models.Manager):
         self.__apply_extra_fields(strangers, geo, user)
 
         strangers = [
-            stranger for stranger in strangers if stranger.distance <= user.user_settings.distance_away]
+            stranger for stranger in strangers
+            if stranger.distance <= user.user_settings.distance_away
+            and stranger.age <= user_dob
+        ]
         strangers = [
-            stranger for stranger in strangers if stranger.user.gender == user.user_settings.gender]
+            stranger for stranger in strangers
+            if stranger.user.gender == user.user_settings.gender
+        ]
 
         if len(strangers) == 0:
             raise NotFound(
