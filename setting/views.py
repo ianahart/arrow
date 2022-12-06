@@ -18,22 +18,15 @@ class ListCreateAPIView(APIView):
 
     permission_classes = [IsAuthenticated, ]
 
-    def post(self, request):
+    def get(self, request):
         try:
-            serializer = None
-            create_serializer = SettingCreateSerializer(data=request.data)
-            create_serializer.is_valid(raise_exception=True)
-            user = CustomUser.objects.all().filter(
-                id=create_serializer.validated_data['user']).first()  # type:ignore
+
+            user = CustomUser.objects.get(pk=request.query_params['id'])
 
             user_setting = Setting.objects.retrieve(
                 user)
 
-            if user_setting is not None:
-                serializer = SettingSerializer(user_setting)
-            else:
-                user_setting = Setting.objects.create(user)
-                serializer = SettingSerializer(user_setting)
+            serializer = SettingSerializer(user_setting)
 
             return Response({
                 'message': 'success',

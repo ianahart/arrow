@@ -50,9 +50,11 @@ class Setting(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
-    distance_away = models.IntegerField(blank=True,  null=True)
-    age = models.IntegerField(blank=True, null=True)
-    gender = models.CharField(max_length=100, blank=True,  null=True)
+    distance_away = models.IntegerField(
+        default=20, blank=True,  null=True)  # type:ignore
+    age = models.IntegerField(default=30, blank=True, null=True)  # type:ignore
+    gender = models.CharField(
+        default='man', max_length=100, blank=True,  null=True)
     user = models.OneToOneField(
         'account.CustomUser',
         on_delete=models.CASCADE,

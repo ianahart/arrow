@@ -15,9 +15,9 @@ export class SettingService {
     }
 
 
-    createOrRetrieveSettings(id: number): Observable<ISetting> {
-        return this.http.post<ICreateSettingsResponse>(
-            `${this.baseURL}/settings/`, {user: id}).pipe(
+    retrieveSettings(id: number): Observable<ISetting> {
+        return this.http.get<ICreateSettingsResponse>(
+            `${this.baseURL}/settings/?id=${id}`).pipe(
                 pluck('settings')
             )
 

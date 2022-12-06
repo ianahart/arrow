@@ -21,7 +21,7 @@ export class FiltersComponent implements OnInit {
     settingsId = 0;
 
     ngOnInit(): void {
-        this.settingService.createOrRetrieveSettings(this.authService.getUser().id)
+        this.settingService.retrieveSettings(this.authService.getUser().id)
             .subscribe((settings) => {
                 this.settingsId = settings.id;
                 this.form.controls['age'].setValue(settings.age ?? 18)

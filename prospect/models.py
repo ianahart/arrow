@@ -38,7 +38,7 @@ class ProspectManager(models.Manager):
     def reset(self, user):
         Prospect.objects.all().filter(
             user_id=user.id).filter(
-            created_at__lte=datetime.now(tz=timezone.utc) - timedelta(hours=6)).filter(
+            created_at__lte=datetime.now(tz=timezone.utc) - timedelta(minutes=30)).filter(
             matched=False
         ).delete()
 

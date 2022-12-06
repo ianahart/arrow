@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from account.models import CustomUser
+from setting.models import Setting
 
 
 class PasswordResetSerializer(serializers.Serializer):
@@ -100,8 +101,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {'email': ['This email is already taken.']})
 
-        CustomUser.objects.create(
+        new_user = CustomUser.objects.create(
             validated_data['email'],
             validated_data['password'],
             **extra_fields
         )
+
+        Setting.objects.create(new_user)
