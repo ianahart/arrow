@@ -83,7 +83,6 @@ class StrangerMananger(models.Manager):
 
         Prospect.objects.reset(user)
         geo = GeoLocation()
-        user_dob = self.__get_age(user.dob)
 
         ids = Stranger.objects.all().filter(
             prospect_strangers__seen=True).filter(
@@ -98,7 +97,7 @@ class StrangerMananger(models.Manager):
         strangers = [
             stranger for stranger in strangers
             if stranger.distance <= user.user_settings.distance_away
-            and stranger.age <= user_dob
+            and stranger.age <= user.user_settings.age
         ]
         strangers = [
             stranger for stranger in strangers
