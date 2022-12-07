@@ -9,12 +9,13 @@ class SettingManager(models.Manager):
 
     def update(self, data, pk: int):
         try:
-            distance_away, age, gender = data.values()
+            distance_away, min_age, max_age, gender = data.values()
 
             setting = Setting.objects.get(pk=pk)
 
-            setting.age = age
             setting.gender = gender
+            setting.min_age = min_age
+            setting.max_age = max_age
             setting.distance_away = distance_away
 
             setting.save()
@@ -52,7 +53,10 @@ class Setting(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     distance_away = models.IntegerField(
         default=20, blank=True,  null=True)  # type:ignore
-    age = models.IntegerField(default=30, blank=True, null=True)  # type:ignore
+    min_age = models.IntegerField(
+        default=18, blank=True, null=True)  # type:ignore
+    max_age = models.IntegerField(
+        default=36, blank=True, null=True)  # type:ignore
     gender = models.CharField(
         default='man', max_length=100, blank=True,  null=True)
     user = models.OneToOneField(

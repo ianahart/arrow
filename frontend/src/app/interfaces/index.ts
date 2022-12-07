@@ -8,7 +8,8 @@ export interface ISetting {
     id: number;
     user: number;
     distance_away: number;
-    age: number;
+    min_age: number;
+    max_age: number;
     gender: string;
 }
 

@@ -14,10 +14,11 @@ class SettingCreateSerializer(serializers.ModelSerializer):
 class SettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Setting
-        fields = ('id', 'user', 'distance_away', 'age', 'gender', )
+        fields = ('id', 'user', 'distance_away',
+                  'min_age',  'max_age', 'gender', )
 
 
 class SettingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Setting
-        fields = ('distance_away', 'age', 'gender', )
+        fields = ('distance_away', 'min_age', 'max_age', 'gender', )

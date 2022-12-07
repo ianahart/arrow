@@ -97,7 +97,8 @@ class StrangerMananger(models.Manager):
         strangers = [
             stranger for stranger in strangers
             if stranger.distance <= user.user_settings.distance_away
-            and stranger.age <= user.user_settings.age
+            and stranger.age <= user.user_settings.max_age
+            and stranger.age >= user.user_settings.min_age
         ]
         strangers = [
             stranger for stranger in strangers

@@ -24,7 +24,8 @@ export class FiltersComponent implements OnInit {
         this.settingService.retrieveSettings(this.authService.getUser().id)
             .subscribe((settings) => {
                 this.settingsId = settings.id;
-                this.form.controls['age'].setValue(settings.age ?? 18)
+                this.form.controls['min_age'].setValue(settings.min_age ?? 18)
+                this.form.controls['max_age'].setValue(settings.max_age ?? 36)
                 this.form.controls['gender'].setValue(settings.gender ?? 'woman')
                 this.form.controls['distance_away'].setValue(settings.distance_away ?? 0)
 
@@ -34,7 +35,8 @@ export class FiltersComponent implements OnInit {
 
     form = this.fb.group({
         distance_away: [0, []],
-        age: [18, []],
+        min_age: [18, []],
+        max_age: [36, []],
         gender: ['woman', []],
     })
 
@@ -42,6 +44,12 @@ export class FiltersComponent implements OnInit {
 
 
     onSubmit() {
+        console.log(this.form.value.max_age)
+        if (this.form.value.max_age && this.form.value.min_age) {
+            if (this.form.value.max_age < this.form.value.min_age) {
+                return;
+            }
+        }
         this.settingService.updateSettings(this.settingsId, this.form.value).subscribe((response) => {
             console.log(response)
         });
@@ -51,8 +59,12 @@ export class FiltersComponent implements OnInit {
         return this.form.get('distance_away');
     }
 
-    get age() {
-        return this.form.get('age');
+    get min_age() {
+        return this.form.get('min_age');
+    }
+
+    get max_age() {
+        return this.form.get('max_age')
     }
 
     get gender() {
