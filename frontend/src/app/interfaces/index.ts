@@ -11,6 +11,7 @@ export interface ISetting {
     min_age: number;
     max_age: number;
     gender: string;
+    incognito: boolean;
 }
 
 export interface ICreateSettingsResponse {

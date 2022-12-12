@@ -7,6 +7,15 @@ logger = logging.getLogger('django')
 
 class SettingManager(models.Manager):
 
+    def toggle_incognito(self, data, pk: int):
+        try:
+            setting = Setting.objects.get(pk=pk)
+            setting.incognito = data['incognito']
+            setting.save()
+
+        except ParseError:
+            logger.error('Unable to toggle incognito  mode on and off.')
+
     def update(self, data, pk: int):
         try:
             distance_away, min_age, max_age, gender = data.values()
@@ -51,6 +60,7 @@ class Setting(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
+    incognito = models.BooleanField(default=False)  # type:ignore
     distance_away = models.IntegerField(
         default=20, blank=True,  null=True)  # type:ignore
     min_age = models.IntegerField(

@@ -15,10 +15,16 @@ class SettingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Setting
         fields = ('id', 'user', 'distance_away',
-                  'min_age',  'max_age', 'gender', )
+                  'min_age',  'max_age', 'gender', 'incognito',)
 
 
 class SettingUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Setting
         fields = ('distance_away', 'min_age', 'max_age', 'gender', )
+
+
+class SettingIncognitoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Setting
+        fields = ('incognito', )

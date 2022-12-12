@@ -28,4 +28,10 @@ export class SettingService {
             form,
         })
     }
+
+    updateIncognitoMode(id: number, toggled: boolean) {
+        console.log('Updating incognito mode')
+        return this.http.patch(`${this.baseURL}/settings/${id}/preferences/`,
+            {incognito: toggled})
+    }
 }
