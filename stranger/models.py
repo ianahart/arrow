@@ -92,9 +92,6 @@ class StrangerMananger(models.Manager):
         strangers = Stranger.objects.all().exclude(
             user_id__in=ids).exclude(user_id=user.id)
 
-        for stranger in strangers:
-            print(stranger.user.user_settings.incognito)
-
         self.__apply_extra_fields(strangers, geo, user)
 
         strangers = [
